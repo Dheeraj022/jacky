@@ -52,7 +52,7 @@ export default function Footer() {
                 </div>
                 <div className="col-md-6 col-lg-5 mil-mb-60">
                   <h6 className="mil-muted mil-up mil-mb-30">Get in touch</h6>
-                  <p className="mil-light-soft mil-up">Email: <span className="mil-no-wrap">jacky.kumar@example.com</span></p>
+                  <p className="mil-light-soft mil-up">Email: <span className="mil-no-wrap">jackykumar435@gmail.com</span></p>
                 </div>
               </div>
             </div>
@@ -62,7 +62,7 @@ export default function Footer() {
                   <ul className="mil-social-icons mil-up">
                     <li><a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" className="social-icon"> <i className="fab fa-linkedin-in"></i></a></li>
                     <li><a href="https://github.com" target="_blank" rel="noopener noreferrer" className="social-icon"> <i className="fab fa-github"></i></a></li>
-                    <li><a href="mailto:jacky.kumar@example.com" className="social-icon"> <i className="far fa-envelope"></i></a></li>
+                    <li><a href="mailto:jackykumar435@gmail.com" className="social-icon"> <i className="far fa-envelope"></i></a></li>
                   </ul>
                 </div>
                 <p className="mil-light-soft mil-up">© Copyright {new Date().getFullYear()} - Jacky Kumar. All Rights Reserved.</p>

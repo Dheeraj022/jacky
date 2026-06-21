@@ -152,7 +152,7 @@ export default function RootLayout({ children }) {
 
                               <h6 className="mil-muted mil-mb-30">Get in touch</h6>
 
-                              <p className="mil-light-soft">Email: <span className="mil-no-wrap">jacky.kumar@example.com</span></p>
+                              <p className="mil-light-soft">Email: <span className="mil-no-wrap">jackykumar435@gmail.com</span></p>
 
                             </div>
                           </div>

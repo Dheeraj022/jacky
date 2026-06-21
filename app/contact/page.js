@@ -15,7 +15,7 @@ export default function Page() {
     e.preventDefault();
     setIsSubmitting(true);
     setError("");
-    
+
     try {
       const res = await fetch('/api/contact', {
         method: 'POST',
@@ -24,7 +24,7 @@ export default function Page() {
         },
         body: JSON.stringify(formData),
       });
-      
+
       if (res.ok) {
         setSubmitted(true);
         setFormData({ name: "", company: "", email: "", phone: "", message: "" });
@@ -112,7 +112,7 @@ export default function Page() {
                 {/* Contact Items */}
                 <div style={{ display: "flex", flexDirection: "column", gap: "20px" }}>
                   {[
-                    { icon: "far fa-envelope", label: "Email", value: "jacky.kumar@example.com", href: "mailto:jacky.kumar@example.com", color: "#ff9800" },
+                    { icon: "far fa-envelope", label: "Email", value: "jackykumar435@gmail.com", href: "mailto:jackykumar435@gmail.com", color: "#ff9800" },
                     { icon: "fab fa-linkedin-in", label: "LinkedIn", value: "linkedin.com/in/jackykumar", href: "https://linkedin.com", color: "#0077b5" },
                     { icon: "fab fa-github", label: "GitHub", value: "github.com/jackykumar", href: "https://github.com", color: "#ffffff" },
                     { icon: "fas fa-phone-alt", label: "Phone", value: "+353 87 123 4567", href: "tel:+353871234567", color: "#4caf50" },
