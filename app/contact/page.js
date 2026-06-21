@@ -5,17 +5,41 @@ import Footer from '../components/Footer';
 import HiddenElements from '../components/HiddenElements';
 
 export default function Page() {
-  const [formData, setFormData] = useState({ name: "", company: "", email: "", message: "" });
+  const [formData, setFormData] = useState({ name: "", company: "", email: "", phone: "", message: "" });
   const [focused, setFocused] = useState({});
   const [submitted, setSubmitted] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [error, setError] = useState("");
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    setSubmitted(true);
-    setTimeout(() => {
-      setSubmitted(false);
-      setFormData({ name: "", company: "", email: "", message: "" });
-    }, 3000);
+    setIsSubmitting(true);
+    setError("");
+    
+    try {
+      const res = await fetch('/api/contact', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
+      
+      if (res.ok) {
+        setSubmitted(true);
+        setFormData({ name: "", company: "", email: "", phone: "", message: "" });
+        setTimeout(() => {
+          setSubmitted(false);
+        }, 5000);
+      } else {
+        const data = await res.json();
+        setError(data.message || "Failed to send message. Please try again.");
+      }
+    } catch (err) {
+      setError("An unexpected error occurred. Please try again.");
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const inputStyle = (field) => ({
@@ -161,10 +185,27 @@ export default function Page() {
                       <i className="fas fa-check" style={{ color: "#4caf50", fontSize: "26px" }}></i>
                     </div>
                     <h4 style={{ color: "rgba(0,0,0,0.85)", marginBottom: "10px" }}>Message Sent!</h4>
-                    <p style={{ color: "rgba(0,0,0,0.5)", fontSize: "14px" }}>Thank you! Jacky will get back to you shortly.</p>
+                    <p style={{ color: "rgba(0,0,0,0.5)", fontSize: "14px" }}>Thank you! The email has been sent successfully to Jacky.</p>
                   </div>
                 ) : (
                   <form onSubmit={handleSubmit}>
+                    {error && (
+                      <div style={{
+                        color: "#d32f2f",
+                        background: "rgba(211,47,47,0.05)",
+                        border: "1px solid rgba(211,47,47,0.2)",
+                        borderRadius: "12px",
+                        padding: "12px 18px",
+                        fontSize: "14px",
+                        marginBottom: "24px",
+                        display: "flex",
+                        alignItems: "center",
+                        gap: "10px"
+                      }}>
+                        <i className="fas fa-exclamation-circle" style={{ fontSize: "16px" }}></i>
+                        <span>{error}</span>
+                      </div>
+                    )}
                     {/* Row 1 */}
                     <div className="row" style={{ marginBottom: "20px" }}>
                       <div className="col-md-6" style={{ marginBottom: "20px" }}>
@@ -191,17 +232,30 @@ export default function Page() {
                       </div>
                     </div>
 
-                    {/* Email */}
-                    <div style={{ marginBottom: "20px" }}>
-                      <label style={{ display: "block", fontSize: "12px", fontWeight: 600, color: "rgba(0,0,0,0.55)", letterSpacing: "0.5px", marginBottom: "8px" }}>EMAIL ADDRESS *</label>
-                      <input
-                        type="email" placeholder="you@example.com" required
-                        value={formData.email}
-                        onChange={e => setFormData({ ...formData, email: e.target.value })}
-                        onFocus={() => setFocused({ ...focused, email: true })}
-                        onBlur={() => setFocused({ ...focused, email: false })}
-                        style={inputStyle("email")}
-                      />
+                    {/* Email & Phone */}
+                    <div className="row" style={{ marginBottom: "20px" }}>
+                      <div className="col-md-6" style={{ marginBottom: "20px" }}>
+                        <label style={{ display: "block", fontSize: "12px", fontWeight: 600, color: "rgba(0,0,0,0.55)", letterSpacing: "0.5px", marginBottom: "8px" }}>EMAIL ADDRESS *</label>
+                        <input
+                          type="email" placeholder="you@example.com" required
+                          value={formData.email}
+                          onChange={e => setFormData({ ...formData, email: e.target.value })}
+                          onFocus={() => setFocused({ ...focused, email: true })}
+                          onBlur={() => setFocused({ ...focused, email: false })}
+                          style={inputStyle("email")}
+                        />
+                      </div>
+                      <div className="col-md-6" style={{ marginBottom: "20px" }}>
+                        <label style={{ display: "block", fontSize: "12px", fontWeight: 600, color: "rgba(0,0,0,0.55)", letterSpacing: "0.5px", marginBottom: "8px" }}>PHONE NUMBER</label>
+                        <input
+                          type="tel" placeholder="e.g. +353 87 123 4567"
+                          value={formData.phone || ""}
+                          onChange={e => setFormData({ ...formData, phone: e.target.value })}
+                          onFocus={() => setFocused({ ...focused, phone: true })}
+                          onBlur={() => setFocused({ ...focused, phone: false })}
+                          style={inputStyle("phone")}
+                        />
+                      </div>
                     </div>
 
                     {/* Message */}
@@ -223,21 +277,22 @@ export default function Page() {
                         <i className="fas fa-lock" style={{ marginRight: "6px", color: "#ff9800" }}></i>
                         Your information is kept strictly confidential.
                       </p>
-                      <button type="submit" style={{
+                      <button type="submit" disabled={isSubmitting} style={{
                         display: "inline-flex", alignItems: "center", gap: "12px",
-                        background: "linear-gradient(135deg, #ff9800, #f57c00)",
+                        background: isSubmitting ? "#cccccc" : "linear-gradient(135deg, #ff9800, #f57c00)",
                         color: "#000", fontWeight: 700, fontSize: "13px", letterSpacing: "1.5px",
                         textTransform: "uppercase", border: "none", borderRadius: "50px",
-                        padding: "16px 32px", cursor: "pointer",
-                        boxShadow: "0 8px 24px rgba(255,152,0,0.35)",
-                        transition: "transform 0.2s ease, box-shadow 0.2s ease"
+                        padding: "16px 32px", cursor: isSubmitting ? "not-allowed" : "pointer",
+                        boxShadow: isSubmitting ? "none" : "0 8px 24px rgba(255,152,0,0.35)",
+                        transition: "transform 0.2s ease, box-shadow 0.2s ease",
+                        opacity: isSubmitting ? 0.7 : 1
                       }}
-                        onMouseEnter={e => { e.currentTarget.style.transform = "translateY(-2px)"; e.currentTarget.style.boxShadow = "0 12px 32px rgba(255,152,0,0.45)"; }}
-                        onMouseLeave={e => { e.currentTarget.style.transform = "translateY(0)"; e.currentTarget.style.boxShadow = "0 8px 24px rgba(255,152,0,0.35)"; }}
+                        onMouseEnter={e => { if (!isSubmitting) { e.currentTarget.style.transform = "translateY(-2px)"; e.currentTarget.style.boxShadow = "0 12px 32px rgba(255,152,0,0.45)"; } }}
+                        onMouseLeave={e => { if (!isSubmitting) { e.currentTarget.style.transform = "translateY(0)"; e.currentTarget.style.boxShadow = "0 8px 24px rgba(255,152,0,0.35)"; } }}
                       >
-                        Send Message
+                        {isSubmitting ? "Sending..." : "Send Message"}
                         <span style={{ width: "32px", height: "32px", borderRadius: "50%", background: "#000", display: "flex", alignItems: "center", justifyContent: "center" }}>
-                          <i className="fas fa-arrow-right" style={{ color: "#ff9800", fontSize: "12px" }}></i>
+                          <i className={isSubmitting ? "fas fa-spinner fa-spin" : "fas fa-arrow-right"} style={{ color: "#ff9800", fontSize: "12px" }}></i>
                         </span>
                       </button>
                     </div>
