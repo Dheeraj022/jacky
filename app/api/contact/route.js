@@ -19,7 +19,7 @@ export async function POST(request) {
     if (!smtpUser || !smtpPass) {
       console.warn("SMTP credentials not configured. Printing email to console instead:");
       console.log(`=========================================`);
-      console.log(`To: dheerajkumar8179@gmail.com`);
+      console.log(`To: jackykumar435@gmail.com`);
       console.log(`Subject: New Enquiry Recieved from my Website`);
       console.log(`From: ${name} <${email}>`);
       console.log(`Company: ${company || 'N/A'}`);
@@ -45,7 +45,7 @@ export async function POST(request) {
     const mailOptions = {
       from: `"${name}" <${smtpUser}>`, // Send from authenticated user to prevent spoofing blockers
       replyTo: email,
-      to: 'dheerajkumar8179@gmail.com',
+      to: 'jackykumar435@gmail.com',
       subject: 'New Enquiry Recieved from my Website',
       html: `
         <h3>New Contact Form Submission</h3>
