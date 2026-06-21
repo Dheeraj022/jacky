@@ -132,8 +132,8 @@ export default function RootLayout({ children }) {
                               <ul className="mil-menu-list">
                                 <li><a href="/about#resume" className="mil-light-soft">Download Resume</a></li>
                                 <li><a href="/contact" className="mil-light-soft">Contact Details</a></li>
-                                <li><a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" className="mil-light-soft">LinkedIn Profile</a></li>
-                                <li><a href="https://github.com" target="_blank" rel="noopener noreferrer" className="mil-light-soft">GitHub Profile</a></li>
+                                <li><a href="https://linkedin.com/in/jackysingh" target="_blank" rel="noopener noreferrer" className="mil-light-soft">LinkedIn Profile</a></li>
+                                <li><a href="https://github.com/jacky4458" target="_blank" rel="noopener noreferrer" className="mil-light-soft">GitHub Profile</a></li>
                               </ul>
 
                             </div>

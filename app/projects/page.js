@@ -105,42 +105,42 @@ const mockRepos = [
     description: "A collection of BRD, FRD, User Stories, and BPMN process mapping templates used in professional Business Analysis workshops.",
     updated: "2 days ago",
     topics: ["Business Analysis", "BPMN", "Agile"],
-    link: "https://github.com"
+    link: "https://github.com/jacky4458"
   },
   {
     name: "covid19-tableau-python",
     description: "Data preparation scripts in Python (Pandas) and corresponding Tableau workbook files for global pandemic trend visualization.",
     updated: "1 week ago",
     topics: ["Python", "Tableau", "Pandas"],
-    link: "https://github.com"
+    link: "https://github.com/jacky4458"
   },
   {
     name: "sql-healthcare-analytics",
     description: "SQL scripts for hospital admission audits, cohort queries, patient demographics, and resource utilization analysis.",
     updated: "2 weeks ago",
     topics: ["SQL", "Healthcare", "Database"],
-    link: "https://github.com"
+    link: "https://github.com/jacky4458"
   },
   {
     name: "credit-risk-scoring",
     description: "Predictive model for credit assessment utilizing Random Forest classifiers in Python and structured banking datasets.",
     updated: "3 weeks ago",
     topics: ["Python", "Machine-Learning", "Risk"],
-    link: "https://github.com"
+    link: "https://github.com/jacky4458"
   },
   {
     name: "powerbi-sales-intelligence",
     description: "Power BI templates containing advanced DAX formulas, star-schema data models, and dynamic regional sales reports.",
     updated: "1 month ago",
     topics: ["Power-BI", "DAX", "Data-Modeling"],
-    link: "https://github.com"
+    link: "https://github.com/jacky4458"
   },
   {
     name: "customer-rfm-segmentation",
     description: "Jupyter Notebook showcasing RFM customer segmentation analysis and K-Means clustering algorithms for marketing personalization.",
     updated: "1 month ago",
     topics: ["Python", "Clustering", "Analytics"],
-    link: "https://github.com"
+    link: "https://github.com/jacky4458"
   }
 ];
 

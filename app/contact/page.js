@@ -113,9 +113,9 @@ export default function Page() {
                 <div style={{ display: "flex", flexDirection: "column", gap: "20px" }}>
                   {[
                     { icon: "far fa-envelope", label: "Email", value: "jackykumar435@gmail.com", href: "mailto:jackykumar435@gmail.com", color: "#ff9800" },
-                    { icon: "fab fa-linkedin-in", label: "LinkedIn", value: "linkedin.com/in/jackykumar", href: "https://linkedin.com", color: "#0077b5" },
-                    { icon: "fab fa-github", label: "GitHub", value: "github.com/jackykumar", href: "https://github.com", color: "#ffffff" },
-                    { icon: "fas fa-phone-alt", label: "Phone", value: "+353 87 123 4567", href: "tel:+353871234567", color: "#4caf50" },
+                    { icon: "fab fa-linkedin-in", label: "LinkedIn", value: "linkedin.com/in/jackysingh", href: "https://linkedin.com/in/jackysingh", color: "#0077b5" },
+                    { icon: "fab fa-github", label: "GitHub", value: "github.com/jacky4458", href: "https://github.com/jacky4458", color: "#ffffff" },
+                    { icon: "fas fa-phone-alt", label: "Phone", value: "+353 89 429 7093", href: "tel:+353894297093", color: "#4caf50" },
                     { icon: "fas fa-map-marker-alt", label: "Location", value: "Dublin, Ireland", href: null, color: "#e91e63" },
                   ].map((item, i) => (
                     <div key={i} style={{ display: "flex", alignItems: "center", gap: "16px" }}>
@@ -248,7 +248,7 @@ export default function Page() {
                       <div className="col-md-6" style={{ marginBottom: "20px" }}>
                         <label style={{ display: "block", fontSize: "12px", fontWeight: 600, color: "rgba(0,0,0,0.55)", letterSpacing: "0.5px", marginBottom: "8px" }}>PHONE NUMBER</label>
                         <input
-                          type="tel" placeholder="e.g. +353 87 123 4567"
+                          type="tel" placeholder="e.g. +353 89 429 7093"
                           value={formData.phone || ""}
                           onChange={e => setFormData({ ...formData, phone: e.target.value })}
                           onFocus={() => setFocused({ ...focused, phone: true })}

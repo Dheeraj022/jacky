@@ -35,8 +35,8 @@ export default function Footer() {
                   <ul className="mil-menu-list mil-up mil-mb-60">
                     <li><a href="/about#resume" className="mil-light-soft">Download Resume</a></li>
                     <li><a href="/contact" className="mil-light-soft">Contact Details</a></li>
-                    <li><a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" className="mil-light-soft">LinkedIn Profile</a></li>
-                    <li><a href="https://github.com" target="_blank" rel="noopener noreferrer" className="mil-light-soft">GitHub Profile</a></li>
+                    <li><a href="https://linkedin.com/in/jackysingh" target="_blank" rel="noopener noreferrer" className="mil-light-soft">LinkedIn Profile</a></li>
+                    <li><a href="https://github.com/jacky4458" target="_blank" rel="noopener noreferrer" className="mil-light-soft">GitHub Profile</a></li>
                   </ul>
                 </div>
               </div>
@@ -60,8 +60,8 @@ export default function Footer() {
               <div className="mil-vert-between">
                 <div className="mil-mb-30">
                   <ul className="mil-social-icons mil-up">
-                    <li><a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" className="social-icon"> <i className="fab fa-linkedin-in"></i></a></li>
-                    <li><a href="https://github.com" target="_blank" rel="noopener noreferrer" className="social-icon"> <i className="fab fa-github"></i></a></li>
+                    <li><a href="https://linkedin.com/in/jackysingh" target="_blank" rel="noopener noreferrer" className="social-icon"> <i className="fab fa-linkedin-in"></i></a></li>
+                    <li><a href="https://github.com/jacky4458" target="_blank" rel="noopener noreferrer" className="social-icon"> <i className="fab fa-github"></i></a></li>
                     <li><a href="mailto:jackykumar435@gmail.com" className="social-icon"> <i className="far fa-envelope"></i></a></li>
                   </ul>
                 </div>

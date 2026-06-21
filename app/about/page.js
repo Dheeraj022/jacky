@@ -400,7 +400,7 @@ export default function Page() {
                 <i className="fas fa-file-alt" style={{ marginRight: "8px", fontSize: "15px" }}></i>
                 Cover Letter
               </a>
-              <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" className="custom-resume-btn btn-linkedin-profile">
+              <a href="https://linkedin.com/in/jackysingh" target="_blank" rel="noopener noreferrer" className="custom-resume-btn btn-linkedin-profile">
                 <i className="fab fa-linkedin-in" style={{ marginRight: "8px", fontSize: "15px" }}></i>
                 LinkedIn Profile
               </a>
