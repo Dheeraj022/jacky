@@ -121,8 +121,8 @@ export default function Page() {
                 </p>
 
                 <div className="mil-about-quote mil-up">
-                  <div className="mil-avatar">
-                    <img src="/img/faces/large/jacky.png" alt="Jacky Kumar" />
+                  <div className="mil-avatar" style={{ border: "2px solid #ff9800", borderRadius: "50%", overflow: "hidden" }}>
+                    <img src="/jacky1.png" alt="Jacky Kumar" />
                   </div>
                   <h6 className="mil-quote">
                     Transforming Business Challenges <span className="mil-thin">into Data-Driven Decisions:</span> Unleashing <span className="mil-thin">Analytical Innovation.</span>
