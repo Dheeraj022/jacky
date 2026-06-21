@@ -134,8 +134,8 @@ export default function Page() {
             <div className="col-lg-5">
               <div className="mil-about-photo mil-mb-90">
                 <div className="mil-lines-place"></div>
-                <div className="mil-up mil-img-frame" style={{ "paddingBottom": "130%" }}>
-                  <img src="/img/photo/1.jpg" alt="Jacky Kumar" className="mil-scale" data-value-1="1" data-value-2="1.2" />
+                <div className="mil-up mil-img-frame" style={{ "paddingBottom": "130%", borderRadius: "16px", overflow: "hidden", border: "2px solid #ff9800" }}>
+                  <img src="/jacky1.png" alt="Jacky Kumar" className="mil-scale" data-value-1="1" data-value-2="1.2" />
                 </div>
               </div>
             </div>
