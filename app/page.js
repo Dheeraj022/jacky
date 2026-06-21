@@ -666,7 +666,7 @@ export default function Page() {
                       MSc Business Analytics (Student)
                     </p>
                     <p style={{ fontSize: "12px", color: "rgba(0,0,0,0.4)", margin: 0 }}>
-                      <i className="fas fa-calendar-alt" style={{ marginRight: "5px" }}></i>Sep 2024 – Present
+                      <i className="fas fa-calendar-alt" style={{ marginRight: "5px" }}></i>Sep 2024 – 2025
                       &nbsp;&nbsp;<i className="fas fa-map-marker-alt" style={{ marginRight: "5px" }}></i>Ireland
                     </p>
                   </div>
