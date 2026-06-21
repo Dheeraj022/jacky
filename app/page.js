@@ -96,7 +96,7 @@ export default function Page() {
                 <div className="col-lg-8">
                   <h1 className="mil-mb-20 mil-muted" style={{ lineHeight: "1.1" }}>Jacky <span className="mil-thin">Kumar</span></h1>
                   <span className="mil-suptitle mil-suptitle-light mil-mb-0" style={{ display: "block", fontSize: "16px", color: "rgba(255, 255, 255, 0.75)" }}>
-                    Business Analyst | Data Analyst | ECBA Certified | MSc Business Analytics
+                    AI Expert |  Data Consultant | Business & Data Analyst | MSc Business Analytics
                   </span>
                 </div>
               </div>
@@ -264,7 +264,7 @@ export default function Page() {
               <div className="row justify-content-center mil-mb-40" style={{ marginTop: "20px" }}>
                 <div className="col-lg-8">
                   <p className="mil-light-soft mil-text-lg mil-mb-0" style={{ fontSize: "16px", lineHeight: "1.7", color: "rgba(255,255,255,0.6)" }}>
-                    Transforming Business Challenges into Data-Driven Decisions Through Analytics, Stakeholder Collaboration, and Process Improvement.
+                    Helping organizations improve decision-making through Business Analysis, Artificial intelligence, stakeholder Collaboration, and data driven insights
                   </p>
                 </div>
               </div>
@@ -354,7 +354,7 @@ export default function Page() {
                     textAlign: "center"
                   }}>
                     <p className="mil-light-soft mil-mb-0" style={{ fontSize: "14px" }}>
-                      Currently seeking <strong>Business Analyst / Data Analyst</strong> opportunities in Ireland.
+                      Watch this videos to understand How i am the best Candidate for you organisations.
                     </p>
                   </div>
                 </div>
