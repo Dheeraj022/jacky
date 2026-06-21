@@ -793,7 +793,7 @@ export default function Page() {
                 Analytics & business case studies delivering measurable impact
               </p>
             </div>
-            <div className="col-lg-5 mil-up" style={{ display: "flex", alignItems: "center", justifyContent: "flex-end" }}>
+            <div className="col-lg-5 mil-up d-flex align-items-center justify-content-start justify-content-lg-end mt-4 mt-lg-0">
               <a href="/projects" className="mil-button mil-arrow-place" style={{ padding: "0 20px 0 28px" }}>
                 <span>View All Projects</span>
               </a>
