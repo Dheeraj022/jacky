@@ -1,10 +1,80 @@
 "use client";
 
-import React from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import Footer from './components/Footer';
 import HiddenElements from './components/HiddenElements';
 
 export default function Page() {
+  const videoRef = useRef(null);
+  const hideTimerRef = useRef(null);
+  const wrapperRef = useRef(null);
+  const [isPlaying, setIsPlaying] = useState(true);
+  const [isMuted, setIsMuted] = useState(true);
+  const [progress, setProgress] = useState(0);
+  const [currentTime, setCurrentTime] = useState(0);
+  const [duration, setDuration] = useState(0);
+  const [showControls, setShowControls] = useState(true);
+  const [isFullscreen, setIsFullscreen] = useState(false);
+
+  const toggleFullscreen = () => {
+    const el = wrapperRef.current;
+    if (!el) return;
+    if (!document.fullscreenElement) {
+      (el.requestFullscreen || el.webkitRequestFullscreen || el.mozRequestFullScreen).call(el);
+      setIsFullscreen(true);
+    } else {
+      (document.exitFullscreen || document.webkitExitFullscreen || document.mozCancelFullScreen).call(document);
+      setIsFullscreen(false);
+    }
+    resetHideTimer();
+  };
+
+  const resetHideTimer = () => {
+    setShowControls(true);
+    if (hideTimerRef.current) clearTimeout(hideTimerRef.current);
+    hideTimerRef.current = setTimeout(() => setShowControls(false), 5000);
+  };
+
+  const togglePlay = () => {
+    if (!videoRef.current) return;
+    if (isPlaying) { videoRef.current.pause(); setIsPlaying(false); }
+    else { videoRef.current.play(); setIsPlaying(true); }
+    resetHideTimer();
+  };
+
+  const toggleMute = () => {
+    if (!videoRef.current) return;
+    videoRef.current.muted = !isMuted;
+    setIsMuted(!isMuted);
+    resetHideTimer();
+  };
+
+  const handleTimeUpdate = () => {
+    if (!videoRef.current) return;
+    const cur = videoRef.current.currentTime;
+    const dur = videoRef.current.duration || 0;
+    setCurrentTime(cur);
+    setDuration(dur);
+    setProgress(dur ? (cur / dur) * 100 : 0);
+  };
+
+  const handleSeek = (e) => {
+    if (!videoRef.current) return;
+    const bar = e.currentTarget;
+    const rect = bar.getBoundingClientRect();
+    const clickX = e.clientX - rect.left;
+    const ratio = Math.max(0, Math.min(1, clickX / rect.width));
+    videoRef.current.currentTime = ratio * (videoRef.current.duration || 0);
+    resetHideTimer();
+  };
+
+  const formatTime = (s) => {
+    if (!s || isNaN(s)) return '0:00';
+    const m = Math.floor(s / 60);
+    const sec = Math.floor(s % 60).toString().padStart(2, '0');
+    return `${m}:${sec}`;
+  };
+
   return (
     <>
       {/* Banner */}
@@ -31,26 +101,35 @@ export default function Page() {
                 </div>
               </div>
 
-              {/* Middle: Centered Video Player (Wider col-lg-10 to cover left & right space) */}
+              {/* Middle: Centered Video Player */}
               <div className="row justify-content-center mil-mb-50">
                 <div className="col-lg-10">
-                  <div className="mil-up" style={{
-                    position: "relative",
-                    borderRadius: "16px",
-                    overflow: "hidden",
-                    border: "1px solid rgba(255, 255, 255, 0.08)",
-                    boxShadow: "0 25px 50px -12px rgba(0, 0, 0, 0.5)",
-                    background: "#1a1a1a",
-                    paddingBottom: "56.25%", // 16:9 ratio
-                    height: 0
-                  }}>
+                  <div
+                    ref={wrapperRef}
+                    className="mil-up"
+                    onMouseMove={resetHideTimer}
+                    onMouseEnter={resetHideTimer}
+                    onMouseLeave={() => { if (hideTimerRef.current) clearTimeout(hideTimerRef.current); setShowControls(false); }}
+                    onClick={resetHideTimer}
+                    style={{
+                      position: "relative",
+                      borderRadius: "16px",
+                      overflow: "hidden",
+                      border: "1px solid rgba(255, 255, 255, 0.08)",
+                      boxShadow: "0 25px 50px -12px rgba(0, 0, 0, 0.5)",
+                      background: "#1a1a1a",
+                      paddingBottom: "56.25%",
+                      height: 0,
+                      cursor: showControls ? "default" : "none"
+                    }}>
                     <video
-                      src="https://assets.mixkit.co/videos/preview/mixkit-financial-charts-on-a-computer-monitor-close-up-34289-large.mp4"
-                      poster="/img/photo/2.jpg"
+                      ref={videoRef}
+                      src="/video1.mp4"
                       autoPlay
                       loop
                       muted
                       playsInline
+                      onTimeUpdate={handleTimeUpdate}
                       style={{
                         position: "absolute",
                         top: 0,
@@ -58,26 +137,125 @@ export default function Page() {
                         width: "100%",
                         height: "100%",
                         objectFit: "cover",
-                        opacity: 0.7
+                        opacity: 0.85
                       }}
                     />
+
+                    {/* Video Controls Bar — auto-hide */}
                     <div style={{
                       position: "absolute",
-                      top: 0,
-                      left: 0,
-                      width: "100%",
-                      height: "100%",
-                      display: "flex",
-                      flexDirection: "column",
-                      alignItems: "center",
-                      justifyContent: "center",
-                      background: "rgba(0, 0, 0, 0.25)"
+                      bottom: 0, left: 0, right: 0,
+                      padding: "10px 18px 14px",
+                      background: "linear-gradient(to top, rgba(0,0,0,0.75) 0%, transparent 100%)",
+                      opacity: showControls ? 1 : 0,
+                      pointerEvents: showControls ? "auto" : "none",
+                      transition: "opacity 0.4s ease"
                     }}>
-                      <div className="mil-button mil-icon-button" style={{ cursor: "pointer", width: "70px", height: "70px", padding: 0 }}>
-                        <i className="fas fa-play" style={{ color: "#000", fontSize: "16px", marginLeft: "4px" }}></i>
+                      {/* Timeline scrubber */}
+                      <div
+                        onClick={handleSeek}
+                        title="Seek"
+                        style={{
+                          width: "100%", height: "4px",
+                          background: "rgba(255,255,255,0.2)",
+                          borderRadius: "4px",
+                          marginBottom: "12px",
+                          cursor: "pointer",
+                          position: "relative"
+                        }}
+                      >
+                        {/* Filled portion */}
+                        <div style={{
+                          height: "100%",
+                          width: `${progress}%`,
+                          background: "linear-gradient(to right, #ff9800, #f57c00)",
+                          borderRadius: "4px",
+                          transition: "width 0.1s linear",
+                          position: "relative"
+                        }}>
+                          {/* Scrubber dot */}
+                          <div style={{
+                            position: "absolute", right: "-6px", top: "50%",
+                            transform: "translateY(-50%)",
+                            width: "12px", height: "12px",
+                            borderRadius: "50%",
+                            background: "#ff9800",
+                            boxShadow: "0 0 0 3px rgba(255,152,0,0.3)"
+                          }}></div>
+                        </div>
                       </div>
-                      <span className="mil-muted mt-3" style={{ fontSize: "13px", fontWeight: "600", letterSpacing: "1px" }}>WATCH WALKTHROUGH</span>
+
+                      {/* Buttons row */}
+                      <div style={{ display: "flex", alignItems: "center", gap: "12px" }}>
+                        {/* Play / Pause */}
+                        <button
+                          onClick={togglePlay}
+                          title={isPlaying ? "Pause" : "Play"}
+                          style={{
+                            width: "34px", height: "34px", borderRadius: "50%",
+                            background: "rgba(255,152,0,0.9)",
+                            border: "none", cursor: "pointer",
+                            display: "flex", alignItems: "center", justifyContent: "center",
+                            flexShrink: 0, transition: "transform 0.2s",
+                            boxShadow: "0 4px 12px rgba(0,0,0,0.3)"
+                          }}
+                          onMouseEnter={e => e.currentTarget.style.transform = "scale(1.12)"}
+                          onMouseLeave={e => e.currentTarget.style.transform = "scale(1)"}
+                        >
+                          <i className={isPlaying ? "fas fa-pause" : "fas fa-play"}
+                            style={{ color: "#000", fontSize: "11px", marginLeft: isPlaying ? "0" : "2px" }}></i>
+                        </button>
+
+                        {/* Time display */}
+                        <span style={{ fontSize: "12px", fontWeight: 600, color: "rgba(255,255,255,0.8)", fontVariantNumeric: "tabular-nums", flexShrink: 0 }}>
+                          {formatTime(currentTime)} / {formatTime(duration)}
+                        </span>
+
+                        {/* Spacer */}
+                        <div style={{ flex: 1 }}></div>
+
+                        {/* Mute / Unmute */}
+                        <button
+                          onClick={toggleMute}
+                          title={isMuted ? "Unmute" : "Mute"}
+                          style={{
+                            width: "34px", height: "34px", borderRadius: "50%",
+                            background: isMuted ? "rgba(255,255,255,0.12)" : "rgba(255,152,0,0.9)",
+                            border: "1px solid rgba(255,255,255,0.15)",
+                            cursor: "pointer",
+                            display: "flex", alignItems: "center", justifyContent: "center",
+                            flexShrink: 0, transition: "transform 0.2s, background 0.2s",
+                            boxShadow: "0 4px 12px rgba(0,0,0,0.3)"
+                          }}
+                          onMouseEnter={e => e.currentTarget.style.transform = "scale(1.12)"}
+                          onMouseLeave={e => e.currentTarget.style.transform = "scale(1)"}
+                        >
+                          <i className={isMuted ? "fas fa-volume-mute" : "fas fa-volume-up"}
+                            style={{ color: isMuted ? "rgba(255,255,255,0.7)" : "#000", fontSize: "12px" }}></i>
+                        </button>
+
+                        {/* Fullscreen */}
+                        <button
+                          onClick={toggleFullscreen}
+                          title={isFullscreen ? "Exit Fullscreen" : "Fullscreen"}
+                          style={{
+                            width: "34px", height: "34px", borderRadius: "50%",
+                            background: "rgba(255,255,255,0.12)",
+                            border: "1px solid rgba(255,255,255,0.15)",
+                            cursor: "pointer",
+                            display: "flex", alignItems: "center", justifyContent: "center",
+                            flexShrink: 0, transition: "transform 0.2s, background 0.2s",
+                            boxShadow: "0 4px 12px rgba(0,0,0,0.3)"
+                          }}
+                          onMouseEnter={e => { e.currentTarget.style.transform = "scale(1.12)"; e.currentTarget.style.background = "rgba(255,152,0,0.9)"; }}
+                          onMouseLeave={e => { e.currentTarget.style.transform = "scale(1)"; e.currentTarget.style.background = "rgba(255,255,255,0.12)"; }}
+                        >
+                          <i className={isFullscreen ? "fas fa-compress" : "fas fa-expand"}
+                            style={{ color: "rgba(255,255,255,0.85)", fontSize: "12px" }}></i>
+                        </button>
+                      </div>
                     </div>
+
                   </div>
                 </div>
               </div>
