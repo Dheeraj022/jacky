@@ -44,8 +44,8 @@ export default function RootLayout({ children }) {
             </div>
             {/* cursor end */}
 
-            {/* preloader */}
-            <div className="mil-preloader">
+            {/* preloader - hidden */}
+            <div className="mil-preloader" style={{ display: 'none' }}>
               <div className="mil-preloader-animation">
                 <div className="mil-pos-abs mil-animation-1">
                   <p className="mil-h3 mil-muted mil-thin">Data-Driven</p>

@@ -148,106 +148,85 @@ export default function Page() {
         </div>
       </section>
 
-      {/* Quick Stats Section */}
-      <section id="stats" className="mil-p-120-60">
-        <div className="container">
-          <div className="row">
-            <div className="col-md-3 col-6 mil-mb-60">
-              <div className="mil-stat-item mil-up">
-                <h2 className="mil-stat-number mil-thin mil-mb-15" style={{ fontSize: "56px" }}>3+</h2>
-                <p className="mil-link mil-light-soft mil-upper">Years Experience</p>
-              </div>
-            </div>
-            <div className="col-md-3 col-6 mil-mb-60">
-              <div className="mil-stat-item mil-up">
-                <h2 className="mil-stat-number mil-thin mil-mb-15" style={{ fontSize: "56px" }}>10+</h2>
-                <p className="mil-link mil-light-soft mil-upper">Analytics Projects</p>
-              </div>
-            </div>
-            <div className="col-md-3 col-6 mil-mb-60">
-              <div className="mil-stat-item mil-up">
-                <h2 className="mil-stat-number mil-thin mil-mb-15" style={{ fontSize: "56px" }}>ECBA</h2>
-                <p className="mil-link mil-light-soft mil-upper">IIBA Certified</p>
-              </div>
-            </div>
-            <div className="col-md-3 col-6 mil-mb-60">
-              <div className="mil-stat-item mil-up">
-                <h2 className="mil-stat-number mil-thin mil-mb-15" style={{ fontSize: "56px" }}>MSc</h2>
-                <p className="mil-link mil-light-soft mil-upper">Business Analytics</p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
 
-      {/* About Me Section */}
-      <section id="about-me" className="mil-p-60-90">
-        <div className="container">
-          <div className="row justify-content-between align-items-center">
-            <div className="col-lg-6 col-xl-5">
-              <div className="mil-mb-60">
-                <h2 className="mil-up mil-mb-30">About <span className="mil-thin">Me</span></h2>
-                <h6 className="mil-up mil-mb-30" style={{ color: "var(--accent, #ff9800)", letterSpacing: "1px" }}>
-                  Professional Summary:
-                </h6>
-                <p className="mil-up mil-mb-30 mil-text-lg" style={{ lineHeight: "1.7", color: "rgba(0,0,0,0.7)" }}>
-                  I am a Business Analyst with experience in business process analysis, stakeholder management, requirements gathering, and data analytics.
-                </p>
-                <p className="mil-up mil-mb-40" style={{ lineHeight: "1.6", color: "rgba(0,0,0,0.6)" }}>
-                  Over the past three years, I have worked on digital transformation initiatives, reporting solutions, dashboard development, and business improvement projects. Currently pursuing MSc Business Analytics in Ireland while strengthening expertise in SQL, Power BI, Tableau, Python, and Business Analysis methodologies.
-                </p>
-                <div className="mil-up">
-                  <a href="/about" className="mil-button mil-arrow-place">
-                    <span>Read Full Profile</span>
-                  </a>
-                </div>
-              </div>
-            </div>
-            
-            <div className="col-lg-5">
-              <div className="mil-about-photo mil-mb-60">
-                <div className="mil-lines-place"></div>
-                <div className="mil-up mil-img-frame" style={{ paddingBottom: "120%" }}>
-                  <img src="/img/photo/1.jpg" alt="Jacky Kumar" className="mil-scale" data-value-1="1" data-value-2="1.15" />
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Achievements Section */}
+      {/* Why You Need Me Section */}
       <section style={{ background: "#f7f7f7", padding: "90px 0 100px" }}>
         <div className="container">
 
           {/* Section Header */}
           <div className="row align-items-center" style={{ marginBottom: "50px" }}>
             <div className="col-lg-7">
-              <p className="mil-up" style={{ color: "#ff9800", fontSize: "12px", fontWeight: 600, letterSpacing: "3px", textTransform: "uppercase", marginBottom: "12px" }}>
-                Highlights
-              </p>
-              <h2 className="mil-up" style={{ marginBottom: "10px" }}>Key <span className="mil-thin">Achievements</span></h2>
+              <h2 className="mil-up" style={{ marginBottom: "10px" }}>
+                <strong>Why</strong> <span className="mil-thin">You Need Me?</span>
+              </h2>
               <p className="mil-up" style={{ color: "rgba(0,0,0,0.5)", fontSize: "15px", marginBottom: 0, maxWidth: "420px" }}>
-                Milestones that define my professional journey
+                A unique blend of skills that drives real business outcomes
               </p>
-            </div>
-            <div className="col-lg-5 mil-up" style={{ display: "flex", alignItems: "center", justifyContent: "flex-end" }}>
-              <a href="/about" className="mil-button mil-arrow-place" style={{ padding: "0 20px 0 28px" }}>
-                <span>View Full Profile</span>
-              </a>
             </div>
           </div>
 
           {/* Divider */}
           <div className="mil-up" style={{ height: "1px", background: "rgba(0,0,0,0.08)", marginBottom: "50px" }}></div>
 
-          {/* Achievement Cards */}
+          {/* Cards */}
           <div className="row" style={{ rowGap: "24px" }}>
             {[
-              { icon: "fas fa-certificate", color: "#ff9800", bg: "rgba(255,152,0,0.1)", title: "ECBA Certified (IIBA)", desc: "Entry Certificate in Business Analysis — globally recognized BA credential from IIBA." },
-              { icon: "fas fa-graduation-cap", color: "#2196f3", bg: "rgba(33,150,243,0.1)", title: "MSc Business Analytics", desc: "Currently pursuing postgraduate degree at University of Galway, Ireland." },
-              { icon: "fas fa-trophy", color: "#9c27b0", bg: "rgba(156,39,176,0.1)", title: "College Cricket Captain", desc: "Led team in state-level championships — building leadership & team strategy." },
-              { icon: "fas fa-chart-bar", color: "#4caf50", bg: "rgba(76,175,80,0.1)", title: "10+ Analytics Projects", desc: "Delivered reporting dashboards, process improvement & digital transformation projects." },
+              {
+                icon: "fas fa-industry",
+                title: "Industry Knowledge",
+                desc: "Deep understanding of business domains — from finance to healthcare — enabling me to ask the right questions and deliver contextually relevant insights.",
+                color: "#ff9800",
+                bg: "rgba(255,152,0,0.1)"
+              },
+              {
+                icon: "fas fa-briefcase",
+                title: "Business & Data Expertise",
+                desc: "Bridging the gap between business stakeholders and data — translating complex requirements into actionable analytical solutions.",
+                color: "#2196f3",
+                bg: "rgba(33,150,243,0.1)"
+              },
+              {
+                icon: "fas fa-chart-line",
+                title: "Analytics Expertise",
+                desc: "Proficient in SQL, Power BI, Tableau, and Python — delivering dashboards and reports that turn raw data into clear, confident decisions.",
+                color: "#9c27b0",
+                bg: "rgba(156,39,176,0.1)"
+              },
+              {
+                icon: "fas fa-comments",
+                title: "Strong Communication",
+                desc: "Exceptional ability to present complex data stories to non-technical audiences, ensuring stakeholder alignment and buy-in at every project stage.",
+                color: "#4caf50",
+                bg: "rgba(76,175,80,0.1)"
+              },
+              {
+                icon: "fas fa-lightbulb",
+                title: "Problem Solver",
+                desc: "A structured, analytical approach to every challenge — breaking down ambiguity, identifying root causes, and delivering pragmatic, data-backed solutions.",
+                color: "#e91e63",
+                bg: "rgba(233,30,99,0.1)"
+              },
+              {
+                icon: "fas fa-bullseye",
+                title: "Results-Oriented",
+                desc: "Focused on delivering measurable impact — from reducing costs to improving efficiency — every recommendation is backed by data and tied to business goals.",
+                color: "#ff5722",
+                bg: "rgba(255,87,34,0.1)"
+              },
+              {
+                icon: "fas fa-sync-alt",
+                title: "Continuous Learner",
+                desc: "Consistently upskilling through certifications, academic study, and hands-on projects — staying ahead of evolving tools, methodologies, and industry trends.",
+                color: "#00bcd4",
+                bg: "rgba(0,188,212,0.1)"
+              },
+              {
+                icon: "fas fa-users",
+                title: "Collaborative Team Player",
+                desc: "Proven ability to work cross-functionally with developers, designers, and business leads — building trust and driving alignment across diverse stakeholder groups.",
+                color: "#8bc34a",
+                bg: "rgba(139,195,74,0.1)"
+              },
             ].map((item, i) => (
               <div key={i} className="col-lg-3 col-md-6">
                 <div className="mil-up" style={{
@@ -258,21 +237,33 @@ export default function Page() {
                   boxShadow: "0 4px 24px rgba(0,0,0,0.07)",
                   border: "1px solid rgba(0,0,0,0.06)",
                   transition: "transform 0.3s ease, box-shadow 0.3s ease"
-                }}>
-                  {/* Icon */}
+                }}
+                  onMouseEnter={e => {
+                    e.currentTarget.style.transform = "translateY(-6px)";
+                    e.currentTarget.style.boxShadow = "0 16px 40px rgba(0,0,0,0.13)";
+                  }}
+                  onMouseLeave={e => {
+                    e.currentTarget.style.transform = "translateY(0)";
+                    e.currentTarget.style.boxShadow = "0 4px 24px rgba(0,0,0,0.07)";
+                  }}
+                >
+                  {/* Icon Box */}
                   <div style={{
                     width: "56px", height: "56px", borderRadius: "14px",
-                    background: item.bg, display: "flex", alignItems: "center",
-                    justifyContent: "center", marginBottom: "22px"
+                    background: item.bg,
+                    display: "flex", alignItems: "center", justifyContent: "center",
+                    marginBottom: "22px"
                   }}>
                     <i className={item.icon} style={{ color: item.color, fontSize: "22px" }}></i>
                   </div>
+
                   {/* Title */}
                   <h6 style={{
                     fontWeight: 700, fontSize: "15px",
                     color: "rgba(0,0,0,0.88)", marginBottom: "10px", lineHeight: "1.4"
                   }}>{item.title}</h6>
-                  {/* Desc */}
+
+                  {/* Description */}
                   <p style={{
                     fontSize: "13px", lineHeight: "1.7",
                     color: "rgba(0,0,0,0.52)", margin: 0
@@ -280,6 +271,273 @@ export default function Page() {
                 </div>
               </div>
             ))}
+          </div>
+
+        </div>
+      </section>
+
+      {/* About Me Section */}
+      <section id="about-me" style={{ background: "#ffffff", padding: "100px 0 100px" }}>
+        <div className="container">
+          <div className="row justify-content-between align-items-center" style={{ rowGap: "60px" }}>
+
+            {/* Text Column */}
+            <div className="col-lg-6 col-xl-5">
+              <p className="mil-up" style={{ color: "#ff9800", fontSize: "12px", fontWeight: 600, letterSpacing: "3px", textTransform: "uppercase", marginBottom: "16px" }}>
+                About Me
+              </p>
+              <h2 className="mil-up" style={{ marginBottom: "28px" }}>
+                <strong>About</strong> <span className="mil-thin">Me</span>
+              </h2>
+              <h6 className="mil-up" style={{ color: "#ff9800", letterSpacing: "1px", marginBottom: "20px", fontSize: "14px", fontWeight: 600 }}>
+                Professional Summary:
+              </h6>
+              <p className="mil-up mil-text-lg" style={{ lineHeight: "1.8", color: "rgba(0,0,0,0.7)", marginBottom: "20px" }}>
+                I am a Business Analyst with experience in business process analysis, stakeholder management, requirements gathering, and data analytics.
+              </p>
+              <p className="mil-up" style={{ lineHeight: "1.8", color: "rgba(0,0,0,0.55)", marginBottom: "40px" }}>
+                Over the past three years, I have worked on digital transformation initiatives, reporting solutions, dashboard development, and business improvement projects. Currently pursuing MSc Business Analytics in Ireland while strengthening expertise in SQL, Power BI, Tableau, Python, and Business Analysis methodologies.
+              </p>
+              <div className="mil-up">
+                <a href="/about" className="mil-button mil-arrow-place">
+                  <span>Read Full Profile</span>
+                </a>
+              </div>
+            </div>
+
+            {/* Image Column */}
+            <div className="col-lg-5">
+              <div className="mil-about-photo" style={{ position: "relative" }}>
+                <div className="mil-lines-place"></div>
+                <div className="mil-up mil-img-frame" style={{ paddingBottom: "115%", borderRadius: "16px", overflow: "hidden" }}>
+                  <img src="/img/photo/1.jpg" alt="Jacky Kumar" className="mil-scale" data-value-1="1" data-value-2="1.15" />
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </section>
+
+
+      {/* My Experience Section */}
+      <section style={{ background: "#f7f7f7", padding: "90px 0 100px" }}>
+        <div className="container">
+
+          {/* Section Header */}
+          <div className="row align-items-center" style={{ marginBottom: "50px" }}>
+            <div className="col-lg-7">
+              <p className="mil-up" style={{ color: "#ff9800", fontSize: "12px", fontWeight: 600, letterSpacing: "3px", textTransform: "uppercase", marginBottom: "12px" }}>
+                Career
+              </p>
+              <h2 className="mil-up" style={{ marginBottom: "10px" }}>
+                My <span className="mil-thin">Experience</span>
+              </h2>
+              <p className="mil-up" style={{ color: "rgba(0,0,0,0.5)", fontSize: "15px", marginBottom: 0, maxWidth: "420px" }}>
+                Professional journey that shaped my analytical expertise
+              </p>
+            </div>
+          </div>
+
+          {/* Divider */}
+          <div className="mil-up" style={{ height: "1px", background: "rgba(0,0,0,0.08)", marginBottom: "50px" }}></div>
+
+          {/* Three Company Cards */}
+          <div className="row" style={{ rowGap: "30px" }}>
+
+            {/* Company 1 */}
+            <div className="col-lg-4">
+              <div className="mil-up" style={{
+                background: "#ffffff",
+                borderRadius: "20px",
+                padding: "40px 36px",
+                height: "100%",
+                boxShadow: "0 4px 24px rgba(0,0,0,0.07)",
+                border: "1px solid rgba(0,0,0,0.06)"
+              }}>
+                {/* Company Header */}
+                <div style={{ display: "flex", alignItems: "flex-start", gap: "18px", marginBottom: "28px" }}>
+                  <div style={{
+                    width: "54px", height: "54px", borderRadius: "14px", flexShrink: 0,
+                    background: "rgba(255,152,0,0.1)",
+                    display: "flex", alignItems: "center", justifyContent: "center"
+                  }}>
+                    <i className="fas fa-building" style={{ color: "#ff9800", fontSize: "22px" }}></i>
+                  </div>
+                  <div>
+                    <h5 style={{ fontWeight: 700, fontSize: "17px", color: "rgba(0,0,0,0.88)", marginBottom: "4px" }}>
+                      Webbyacad Software Solutions
+                    </h5>
+                    <p style={{ fontSize: "13px", color: "#ff9800", fontWeight: 600, marginBottom: "2px" }}>
+                      Business Analyst
+                    </p>
+                    <p style={{ fontSize: "12px", color: "rgba(0,0,0,0.4)", margin: 0 }}>
+                      <i className="fas fa-calendar-alt" style={{ marginRight: "5px" }}></i>Jan 2021 – Dec 2023
+                      &nbsp;&nbsp;<i className="fas fa-map-marker-alt" style={{ marginRight: "5px" }}></i>India
+                    </p>
+                  </div>
+                </div>
+
+                {/* Divider */}
+                <div style={{ height: "1px", background: "rgba(0,0,0,0.07)", marginBottom: "24px" }}></div>
+
+                {/* Bullet Points */}
+                <ul style={{ listStyle: "none", padding: 0, margin: 0, display: "flex", flexDirection: "column", gap: "14px" }}>
+                  {[
+                    "Led requirements gathering sessions with 10+ business stakeholders across departments.",
+                    "Developed and maintained process flow diagrams and BRDs for 5+ digital transformation projects.",
+                    "Built Power BI dashboards reducing manual reporting time by 40%.",
+                    "Collaborated with development teams to translate business needs into technical specifications.",
+                    "Conducted gap analysis and delivered actionable recommendations to senior management.",
+                  ].map((point, i) => (
+                    <li key={i} style={{ display: "flex", alignItems: "flex-start", gap: "12px" }}>
+                      <span style={{
+                        minWidth: "24px", height: "24px", borderRadius: "50%",
+                        background: "rgba(255,152,0,0.12)",
+                        color: "#ff9800", fontSize: "11px", fontWeight: 700,
+                        display: "flex", alignItems: "center", justifyContent: "center", marginTop: "1px"
+                      }}>{i + 1}</span>
+                      <p style={{ fontSize: "13.5px", lineHeight: "1.7", color: "rgba(0,0,0,0.6)", margin: 0 }}>{point}</p>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+
+            {/* Company 2 */}
+            <div className="col-lg-4">
+              <div className="mil-up" style={{
+                background: "#ffffff",
+                borderRadius: "20px",
+                padding: "40px 36px",
+                height: "100%",
+                boxShadow: "0 4px 24px rgba(0,0,0,0.07)",
+                border: "1px solid rgba(0,0,0,0.06)"
+              }}>
+                {/* Company Header */}
+                <div style={{ display: "flex", alignItems: "flex-start", gap: "18px", marginBottom: "28px" }}>
+                  <div style={{
+                    width: "54px", height: "54px", borderRadius: "14px", flexShrink: 0,
+                    background: "rgba(33,150,243,0.1)",
+                    display: "flex", alignItems: "center", justifyContent: "center"
+                  }}>
+                    <i className="fas fa-graduation-cap" style={{ color: "#2196f3", fontSize: "22px" }}></i>
+                  </div>
+                  <div>
+                    <h5 style={{ fontWeight: 700, fontSize: "17px", color: "rgba(0,0,0,0.88)", marginBottom: "4px" }}>
+                      University of Galway
+                    </h5>
+                    <p style={{ fontSize: "13px", color: "#2196f3", fontWeight: 600, marginBottom: "2px" }}>
+                      MSc Business Analytics (Student)
+                    </p>
+                    <p style={{ fontSize: "12px", color: "rgba(0,0,0,0.4)", margin: 0 }}>
+                      <i className="fas fa-calendar-alt" style={{ marginRight: "5px" }}></i>Sep 2024 – Present
+                      &nbsp;&nbsp;<i className="fas fa-map-marker-alt" style={{ marginRight: "5px" }}></i>Ireland
+                    </p>
+                  </div>
+                </div>
+
+                {/* Divider */}
+                <div style={{ height: "1px", background: "rgba(0,0,0,0.07)", marginBottom: "24px" }}></div>
+
+                {/* Bullet Points */}
+                <ul style={{ listStyle: "none", padding: 0, margin: 0, display: "flex", flexDirection: "column", gap: "14px" }}>
+                  {[
+                    "Studying advanced modules in Data Mining, Machine Learning, and Business Intelligence.",
+                    "Completed hands-on projects using SQL, Python, Tableau, and Power BI.",
+                    "Applied statistical modelling techniques to real-world business datasets.",
+                    "Achieved ECBA certification from IIBA — globally recognised BA credential.",
+                    "Developed strong expertise in Agile, BPMN, and stakeholder management frameworks.",
+                  ].map((point, i) => (
+                    <li key={i} style={{ display: "flex", alignItems: "flex-start", gap: "12px" }}>
+                      <span style={{
+                        minWidth: "24px", height: "24px", borderRadius: "50%",
+                        background: "rgba(33,150,243,0.12)",
+                        color: "#2196f3", fontSize: "11px", fontWeight: 700,
+                        display: "flex", alignItems: "center", justifyContent: "center", marginTop: "1px"
+                      }}>{i + 1}</span>
+                      <p style={{ fontSize: "13.5px", lineHeight: "1.7", color: "rgba(0,0,0,0.6)", margin: 0 }}>{point}</p>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+
+            {/* Company 3 */}
+            <div className="col-lg-4">
+              <div className="mil-up" style={{
+                background: "#ffffff",
+                borderRadius: "20px",
+                padding: "40px 36px",
+                height: "100%",
+                boxShadow: "0 4px 24px rgba(0,0,0,0.07)",
+                border: "1px solid rgba(0,0,0,0.06)"
+              }}>
+                {/* Company Header */}
+                <div style={{ display: "flex", alignItems: "flex-start", gap: "18px", marginBottom: "28px" }}>
+                  <div style={{
+                    width: "54px", height: "54px", borderRadius: "14px", flexShrink: 0,
+                    background: "rgba(156,39,176,0.1)",
+                    display: "flex", alignItems: "center", justifyContent: "center"
+                  }}>
+                    <i className="fas fa-laptop-code" style={{ color: "#9c27b0", fontSize: "22px" }}></i>
+                  </div>
+                  <div>
+                    <h5 style={{ fontWeight: 700, fontSize: "17px", color: "rgba(0,0,0,0.88)", marginBottom: "4px" }}>
+                      4 Square Digital Pvt Ltd
+                    </h5>
+                    <p style={{ fontSize: "13px", color: "#9c27b0", fontWeight: 600, marginBottom: "2px" }}>
+                      Digital Consultant
+                    </p>
+                    <p style={{ fontSize: "12px", color: "rgba(0,0,0,0.4)", margin: 0 }}>
+                      <i className="fas fa-calendar-alt" style={{ marginRight: "5px" }}></i>Aug 2021 – Sep 2022
+                      &nbsp;&nbsp;<i className="fas fa-map-marker-alt" style={{ marginRight: "5px" }}></i>India
+                    </p>
+                  </div>
+                </div>
+
+                {/* Divider */}
+                <div style={{ height: "1px", background: "rgba(0,0,0,0.07)", marginBottom: "16px" }}></div>
+
+                {/* Description */}
+                <p style={{ fontSize: "13.5px", lineHeight: "1.7", color: "rgba(0,0,0,0.6)", marginBottom: "20px" }}>
+                  Assisted marketing and campaign administrators with performance metrics auditing and insights extraction.
+                </p>
+
+                {/* Bullet Points */}
+                <ul style={{ listStyle: "none", padding: 0, margin: 0, display: "flex", flexDirection: "column", gap: "14px" }}>
+                  {[
+                    "Reporting dashboards formulation & client queries management.",
+                    "Digital campaign performance analysis.",
+                    "Translating raw transaction logs into structural business observations.",
+                  ].map((point, i) => (
+                    <li key={i} style={{ display: "flex", alignItems: "flex-start", gap: "12px" }}>
+                      <span style={{
+                        minWidth: "24px", height: "24px", borderRadius: "50%",
+                        background: "rgba(156,39,176,0.12)",
+                        color: "#9c27b0", fontSize: "11px", fontWeight: 700,
+                        display: "flex", alignItems: "center", justifyContent: "center", marginTop: "1px"
+                      }}>{i + 1}</span>
+                      <p style={{ fontSize: "13.5px", lineHeight: "1.7", color: "rgba(0,0,0,0.6)", margin: 0 }}>{point}</p>
+                    </li>
+                  ))}
+                </ul>
+
+                {/* Key Achievement */}
+                <div style={{
+                  marginTop: "24px",
+                  padding: "14px 16px",
+                  background: "rgba(156,39,176,0.05)",
+                  borderLeft: "3px solid #9c27b0",
+                  borderRadius: "0 8px 8px 0"
+                }}>
+                  <p style={{ fontSize: "13px", lineHeight: "1.7", color: "rgba(0,0,0,0.65)", margin: 0 }}>
+                    <strong style={{ color: "#9c27b0" }}>Key Achievement:</strong> Helped improve digital performance reporting accuracy and enhanced client satisfaction rates.
+                  </p>
+                </div>
+              </div>
+            </div>
+
           </div>
 
         </div>
