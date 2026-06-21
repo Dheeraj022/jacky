@@ -91,13 +91,13 @@ body {
 }
 
 *::-moz-selection {
-  color: inherit;
-  background-color: transparent;
+  color: #ffffff;
+  background-color: #ff9800;
 }
 
 *::selection {
-  color: inherit;
-  background-color: transparent;
+  color: #ffffff;
+  background-color: #ff9800;
 }
 
 .mil-wrapper {

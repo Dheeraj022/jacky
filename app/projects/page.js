@@ -166,7 +166,7 @@ export default function Page() {
           </div>
           <div className="container">
             <ul className="mil-breadcrumbs mil-mb-60">
-              <li><a href="/">Homepage</a></li>
+              <li><a href="/">Home</a></li>
               <li><a href="/projects">Projects</a></li>
             </ul>
             <h1 className="mil-mb-60">My Analytics &amp; <br /> <span className="mil-thin">Business</span> Case Studies</h1>

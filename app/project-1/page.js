@@ -15,7 +15,7 @@ export default function Page() {
           </div>
           <div className="container">
             <ul className="mil-breadcrumbs mil-mb-60">
-              <li><a href="/">Homepage</a></li>
+              <li><a href="/">Home</a></li>
               <li><a href="/projects">Projects</a></li>
               <li><a href="/project-1">COVID-19 Analysis</a></li>
             </ul>

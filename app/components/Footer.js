@@ -10,11 +10,6 @@ export default function Footer() {
           <div className="row justify-content-between">
             <div className="col-md-4 col-lg-4 mil-mb-60">
               <div className="mil-muted mil-logo mil-up mil-mb-30">Jacky.</div>
-              <p className="mil-light-soft mil-up mil-mb-30">Subscribe to newsletter:</p>
-              <form className="mil-subscribe-form mil-up" onSubmit={(e) => e.preventDefault()}>
-                <input type="text" placeholder="Enter your email" />
-                <button type="submit" className="mil-button mil-icon-button-sm mil-arrow-place"></button>
-              </form>
             </div>
             <div className="col-md-7 col-lg-6">
               <div className="row justify-content-end">
@@ -25,7 +20,7 @@ export default function Footer() {
                         <a href="/">Home</a>
                       </li>
                       <li className="mil-up">
-                        <a href="/about">About & Resume</a>
+                        <a href="/about">About</a>
                       </li>
                       <li className="mil-up">
                         <a href="/projects">Projects</a>

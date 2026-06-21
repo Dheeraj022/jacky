@@ -1,10 +1,87 @@
 "use client";
 
-import React from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import Footer from '../components/Footer';
 import HiddenElements from '../components/HiddenElements';
 
 export default function Page() {
+  const videoRef = useRef(null);
+  const hideTimerRef = useRef(null);
+  const wrapperRef = useRef(null);
+  const [isPlaying, setIsPlaying] = useState(true);
+  const [isMuted, setIsMuted] = useState(true);
+  const [progress, setProgress] = useState(0);
+  const [currentTime, setCurrentTime] = useState(0);
+  const [duration, setDuration] = useState(0);
+  const [showControls, setShowControls] = useState(true);
+  const [isFullscreen, setIsFullscreen] = useState(false);
+
+  // Clear timeout on unmount
+  useEffect(() => {
+    return () => {
+      if (hideTimerRef.current) clearTimeout(hideTimerRef.current);
+    };
+  }, []);
+
+  const toggleFullscreen = () => {
+    const el = wrapperRef.current;
+    if (!el) return;
+    if (!document.fullscreenElement) {
+      (el.requestFullscreen || el.webkitRequestFullscreen || el.mozRequestFullScreen).call(el);
+      setIsFullscreen(true);
+    } else {
+      (document.exitFullscreen || document.webkitExitFullscreen || document.mozCancelFullScreen).call(document);
+      setIsFullscreen(false);
+    }
+    resetHideTimer();
+  };
+
+  const resetHideTimer = () => {
+    setShowControls(true);
+    if (hideTimerRef.current) clearTimeout(hideTimerRef.current);
+    hideTimerRef.current = setTimeout(() => setShowControls(false), 5000);
+  };
+
+  const togglePlay = () => {
+    if (!videoRef.current) return;
+    if (isPlaying) { videoRef.current.pause(); setIsPlaying(false); }
+    else { videoRef.current.play(); setIsPlaying(true); }
+    resetHideTimer();
+  };
+
+  const toggleMute = () => {
+    if (!videoRef.current) return;
+    videoRef.current.muted = !isMuted;
+    setIsMuted(!isMuted);
+    resetHideTimer();
+  };
+
+  const handleTimeUpdate = () => {
+    if (!videoRef.current) return;
+    const cur = videoRef.current.currentTime;
+    const dur = videoRef.current.duration || 0;
+    setCurrentTime(cur);
+    setDuration(dur);
+    setProgress(dur ? (cur / dur) * 100 : 0);
+  };
+
+  const handleSeek = (e) => {
+    if (!videoRef.current) return;
+    const bar = e.currentTarget;
+    const rect = bar.getBoundingClientRect();
+    const clickX = e.clientX - rect.left;
+    const ratio = Math.max(0, Math.min(1, clickX / rect.width));
+    videoRef.current.currentTime = ratio * (videoRef.current.duration || 0);
+    resetHideTimer();
+  };
+
+  const formatTime = (s) => {
+    if (!s || isNaN(s)) return '0:00';
+    const m = Math.floor(s / 60);
+    const sec = Math.floor(s % 60).toString().padStart(2, '0');
+    return `${m}:${sec}`;
+  };
+
   return (
     <>
       {/* Inner Banner */}
@@ -15,7 +92,7 @@ export default function Page() {
           </div>
           <div className="container">
             <ul className="mil-breadcrumbs mil-mb-60">
-              <li><a href="/">Homepage</a></li>
+              <li><a href="/">Home</a></li>
               <li><a href="/about">About & Resume</a></li>
             </ul>
             <h1 className="mil-mb-60">About My <span className="mil-thin">Professional</span><br /> Journey</h1>
@@ -86,35 +163,157 @@ export default function Page() {
               </div>
 
               <div className="col-lg-6 mil-mb-60">
-                <div className="mil-up" style={{
-                  position: "relative",
-                  borderRadius: "12px",
-                  overflow: "hidden",
-                  boxShadow: "0 20px 40px rgba(0,0,0,0.5)",
-                  background: "#1a1a1a",
-                  paddingBottom: "56.25%",
-                  height: 0
-                }}>
+                <div
+                  ref={wrapperRef}
+                  className="mil-up"
+                  onMouseMove={resetHideTimer}
+                  onMouseEnter={resetHideTimer}
+                  onMouseLeave={() => { if (hideTimerRef.current) clearTimeout(hideTimerRef.current); setShowControls(false); }}
+                  onClick={resetHideTimer}
+                  style={{
+                    position: "relative",
+                    borderRadius: "12px",
+                    overflow: "hidden",
+                    boxShadow: "0 20px 40px rgba(0,0,0,0.5)",
+                    background: "#1a1a1a",
+                    paddingBottom: "56.25%",
+                    height: 0,
+                    cursor: showControls ? "default" : "none"
+                  }}>
+                  <video
+                    ref={videoRef}
+                    src="/video1.mp4"
+                    autoPlay
+                    loop
+                    muted
+                    playsInline
+                    onTimeUpdate={handleTimeUpdate}
+                    style={{
+                      position: "absolute",
+                      top: 0,
+                      left: 0,
+                      width: "100%",
+                      height: "100%",
+                      objectFit: "cover",
+                      opacity: 0.85
+                    }}
+                  />
+
+                  {/* Video Controls Bar — auto-hide */}
                   <div style={{
                     position: "absolute",
-                    top: 0,
-                    left: 0,
-                    width: "100%",
-                    height: "100%",
-                    display: "flex",
-                    flexDirection: "column",
-                    alignItems: "center",
-                    justifyContent: "center",
-                    backgroundImage: "linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('/img/photo/2.jpg')",
-                    backgroundSize: "cover",
-                    backgroundPosition: "center"
+                    bottom: 0, left: 0, right: 0,
+                    padding: "10px 18px 14px",
+                    background: "linear-gradient(to top, rgba(0,0,0,0.75) 0%, transparent 100%)",
+                    opacity: showControls ? 1 : 0,
+                    pointerEvents: showControls ? "auto" : "none",
+                    transition: "opacity 0.4s ease"
                   }}>
-                    <div className="mil-button mil-icon-button mil-arrow-place" style={{ cursor: "pointer", width: "80px", height: "80px", marginBottom: "15px" }}>
-                      <i className="fas fa-play" style={{ color: "#fff", fontSize: "20px", marginLeft: "5px" }}></i>
+                    {/* Timeline scrubber */}
+                    <div
+                      onClick={handleSeek}
+                      title="Seek"
+                      style={{
+                        width: "100%", height: "4px",
+                        background: "rgba(255,255,255,0.2)",
+                        borderRadius: "4px",
+                        marginBottom: "12px",
+                        cursor: "pointer",
+                        position: "relative"
+                      }}
+                    >
+                      {/* Filled portion */}
+                      <div style={{
+                        height: "100%",
+                        width: `${progress}%`,
+                        background: "linear-gradient(to right, #ff9800, #f57c00)",
+                        borderRadius: "4px",
+                        transition: "width 0.1s linear",
+                        position: "relative"
+                      }}>
+                        {/* Scrubber dot */}
+                        <div style={{
+                          position: "absolute", right: "-6px", top: "50%",
+                          transform: "translateY(-50%)",
+                          width: "12px", height: "12px",
+                          borderRadius: "50%",
+                          background: "#ff9800",
+                          boxShadow: "0 0 0 3px rgba(255,152,0,0.3)"
+                        }}></div>
+                      </div>
                     </div>
-                    <h5 className="mil-muted">Why Should You Hire Me?</h5>
-                    <p className="mil-light-soft mil-text-sm">Video Duration: 90 Seconds</p>
+
+                    {/* Buttons row */}
+                    <div style={{ display: "flex", alignItems: "center", gap: "12px" }}>
+                      {/* Play / Pause */}
+                      <button
+                        onClick={togglePlay}
+                        title={isPlaying ? "Pause" : "Play"}
+                        style={{
+                          width: "34px", height: "34px", borderRadius: "50%",
+                          background: "rgba(255,152,0,0.9)",
+                          border: "none", cursor: "pointer",
+                          display: "flex", alignItems: "center", justifyContent: "center",
+                          flexShrink: 0, transition: "transform 0.2s",
+                          boxShadow: "0 4px 12px rgba(0,0,0,0.3)"
+                        }}
+                        onMouseEnter={e => e.currentTarget.style.transform = "scale(1.12)"}
+                        onMouseLeave={e => e.currentTarget.style.transform = "scale(1)"}
+                      >
+                        <i className={isPlaying ? "fas fa-pause" : "fas fa-play"}
+                          style={{ color: "#000", fontSize: "11px", marginLeft: isPlaying ? "0" : "2px" }}></i>
+                      </button>
+
+                      {/* Time display */}
+                      <span style={{ fontSize: "12px", fontWeight: 600, color: "rgba(255,255,255,0.8)", fontVariantNumeric: "tabular-nums", flexShrink: 0 }}>
+                        {formatTime(currentTime)} / {formatTime(duration)}
+                      </span>
+
+                      {/* Spacer */}
+                      <div style={{ flex: 1 }}></div>
+
+                      {/* Mute / Unmute */}
+                      <button
+                        onClick={toggleMute}
+                        title={isMuted ? "Unmute" : "Mute"}
+                        style={{
+                          width: "34px", height: "34px", borderRadius: "50%",
+                          background: isMuted ? "rgba(255,255,255,0.12)" : "rgba(255,152,0,0.9)",
+                          border: "1px solid rgba(255,255,255,0.15)",
+                          cursor: "pointer",
+                          display: "flex", alignItems: "center", justifyContent: "center",
+                          flexShrink: 0, transition: "transform 0.2s, background 0.2s",
+                          boxShadow: "0 4px 12px rgba(0,0,0,0.3)"
+                        }}
+                        onMouseEnter={e => e.currentTarget.style.transform = "scale(1.12)"}
+                        onMouseLeave={e => e.currentTarget.style.transform = "scale(1)"}
+                      >
+                        <i className={isMuted ? "fas fa-volume-mute" : "fas fa-volume-up"}
+                          style={{ color: isMuted ? "rgba(255,255,255,0.7)" : "#000", fontSize: "12px" }}></i>
+                      </button>
+
+                      {/* Fullscreen */}
+                      <button
+                        onClick={toggleFullscreen}
+                        title={isFullscreen ? "Exit Fullscreen" : "Fullscreen"}
+                        style={{
+                          width: "34px", height: "34px", borderRadius: "50%",
+                          background: "rgba(255,255,255,0.12)",
+                          border: "1px solid rgba(255,255,255,0.15)",
+                          cursor: "pointer",
+                          display: "flex", alignItems: "center", justifyContent: "center",
+                          flexShrink: 0, transition: "transform 0.2s, background 0.2s",
+                          boxShadow: "0 4px 12px rgba(0,0,0,0.3)"
+                        }}
+                        onMouseEnter={e => { e.currentTarget.style.transform = "scale(1.12)"; e.currentTarget.style.background = "rgba(255,152,0,0.9)"; }}
+                        onMouseLeave={e => { e.currentTarget.style.transform = "scale(1)"; e.currentTarget.style.background = "rgba(255,255,255,0.12)"; }}
+                      >
+                        <i className={isFullscreen ? "fas fa-compress" : "fas fa-expand"}
+                          style={{ color: "rgba(255,255,255,0.85)", fontSize: "12px" }}></i>
+                      </button>
+                    </div>
                   </div>
+
                 </div>
               </div>
             </div>
@@ -124,6 +323,62 @@ export default function Page() {
 
       {/* Resume Section */}
       <section id="resume" className="mil-p-120-120">
+        <style>{`
+          .resume-btn-group {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 16px;
+            margin-top: 30px;
+          }
+          .custom-resume-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 14px 28px;
+            font-size: 13px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border-radius: 30px;
+            text-decoration: none !important;
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
+            cursor: pointer;
+          }
+          .btn-pdf-resume {
+            background: #ff9800;
+            color: #ffffff !important;
+            border: 1px solid #ff9800;
+          }
+          .btn-pdf-resume:hover {
+            background: #f57c00;
+            border-color: #f57c00;
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(255, 152, 0, 0.25);
+          }
+          .btn-cover-letter {
+            background: rgba(255, 152, 0, 0.05);
+            color: #ff9800 !important;
+            border: 1px solid rgba(255, 152, 0, 0.25);
+          }
+          .btn-cover-letter:hover {
+            background: rgba(255, 152, 0, 0.1);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(255, 152, 0, 0.08);
+          }
+          .btn-linkedin-profile {
+            background: #0a66c2;
+            color: #ffffff !important;
+            border: 1px solid #0a66c2;
+          }
+          .btn-linkedin-profile:hover {
+            background: #004182;
+            border-color: #004182;
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(10, 102, 194, 0.25);
+          }
+        `}</style>
         <div className="container">
           <div className="mil-recruiter-banner mil-up" style={{
             background: "rgba(255, 152, 0, 0.05)",
@@ -133,18 +388,21 @@ export default function Page() {
             textAlign: "center"
           }}>
             <h2 className="mil-mb-20">Download My Resume</h2>
-            <p className="mil-light-soft mil-text-lg mil-mb-40" style={{ maxWidth: "600px", margin: "0 auto 40px" }}>
+            <p className="mil-dark-soft mil-text-lg mil-mb-40" style={{ maxWidth: "600px", margin: "0 auto 40px" }}>
               Get direct access to my comprehensive curriculum vitae, cover letter, or view my up-to-date professional profile on LinkedIn.
             </p>
-            <div className="row justify-content-center" style={{ gap: "20px" }}>
-              <a href="#." className="mil-button mil-arrow-place">
-                <span>📄 PDF Resume</span>
+            <div className="resume-btn-group">
+              <a href="#." className="custom-resume-btn btn-pdf-resume">
+                <i className="fas fa-file-pdf" style={{ marginRight: "8px", fontSize: "15px" }}></i>
+                PDF Resume
               </a>
-              <a href="#." className="mil-button mil-arrow-place mil-dark">
-                <span>📄 Cover Letter</span>
+              <a href="#." className="custom-resume-btn btn-cover-letter">
+                <i className="fas fa-file-alt" style={{ marginRight: "8px", fontSize: "15px" }}></i>
+                Cover Letter
               </a>
-              <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" className="mil-button mil-arrow-place mil-dark">
-                <span>💼 LinkedIn Profile</span>
+              <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" className="custom-resume-btn btn-linkedin-profile">
+                <i className="fab fa-linkedin-in" style={{ marginRight: "8px", fontSize: "15px" }}></i>
+                LinkedIn Profile
               </a>
             </div>
           </div>
@@ -343,14 +601,144 @@ export default function Page() {
       </section>
 
       {/* Achievement Wall & Learning Journey */}
-      <section className="mil-p-120-60">
+      <section className="mil-p-120-60 custom-accordion-timeline-section" style={{ position: "relative" }}>
+        <style>{`
+          .custom-accordion-timeline-section .mil-accordion-group {
+            background: #ffffff;
+            border: 1px solid rgba(0, 0, 0, 0.05);
+            border-radius: 12px;
+            padding: 24px 28px;
+            margin-bottom: 20px !important;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.01);
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+          }
+          .custom-accordion-timeline-section .mil-accordion-group:hover {
+            border-color: rgba(255, 152, 0, 0.3);
+            box-shadow: 0 10px 30px rgba(255, 152, 0, 0.06);
+            transform: translateY(-2px);
+          }
+          .custom-accordion-timeline-section .mil-accordion-menu {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            user-select: none;
+            padding: 0;
+            margin: 0;
+            background: transparent !important;
+          }
+          .custom-accordion-timeline-section .mil-accordion-menu p {
+            font-size: 14px;
+            font-weight: 600;
+            color: #1a1a1a;
+            margin-bottom: 0;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+          }
+          .custom-accordion-timeline-section .mil-symbol {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background: rgba(255, 152, 0, 0.08);
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            transition: all 0.3s ease;
+          }
+          .custom-accordion-timeline-section .mil-symbol span {
+            font-size: 16px;
+            color: #ff9800;
+            font-weight: 600;
+            line-height: 1;
+            position: absolute;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+          }
+          .custom-accordion-timeline-section .mil-accordion-content p {
+            padding-top: 16px;
+            font-size: 14px;
+            color: #555;
+            line-height: 1.6;
+            margin-bottom: 0;
+          }
+
+          /* Timeline */
+          .custom-timeline {
+            position: relative;
+            padding-left: 35px;
+          }
+          .custom-timeline::before {
+            content: "";
+            position: absolute;
+            left: 15px;
+            top: 10px;
+            bottom: 10px;
+            width: 2px;
+            background: linear-gradient(to bottom, #ff9800 0%, rgba(255, 152, 0, 0.15) 100%);
+          }
+          .custom-timeline-item {
+            position: relative;
+            margin-bottom: 25px;
+          }
+          .custom-timeline-item:last-child {
+            margin-bottom: 0;
+          }
+          .custom-timeline-dot {
+            position: absolute;
+            left: -30px;
+            top: 20px;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: #ffffff;
+            border: 3px solid #ff9800;
+            z-index: 1;
+            transition: all 0.3s ease;
+            box-shadow: 0 0 0 3px rgba(255, 152, 0, 0.12);
+          }
+          .custom-timeline-item:hover .custom-timeline-dot {
+            background: #ff9800;
+            transform: scale(1.2);
+            box-shadow: 0 0 0 5px rgba(255, 152, 0, 0.2);
+          }
+          .custom-timeline-card {
+            background: #ffffff;
+            border: 1px solid rgba(0, 0, 0, 0.05);
+            border-radius: 12px;
+            padding: 16px 20px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.015);
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+          }
+          .custom-timeline-card:hover {
+            border-color: rgba(255, 152, 0, 0.3);
+            box-shadow: 0 10px 25px rgba(255, 152, 0, 0.06);
+            transform: translateX(4px);
+          }
+          .custom-timeline-year {
+            font-size: 12px;
+            font-weight: 700;
+            color: #ff9800;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 4px;
+          }
+          .custom-timeline-title {
+            font-size: 15px;
+            font-weight: 600;
+            color: #1a1a1a;
+            margin-bottom: 0;
+          }
+        `}</style>
         <div className="container">
           <div className="row justify-content-between align-items-center">
             <div className="col-lg-5 mil-mb-60">
               <h2 className="mil-up mil-mb-30">Achievement Wall</h2>
-              <p className="mil-light-soft mil-up mil-mb-60">
-                Key professional and extracurricular milestones reflecting my dedication, team leadership, and capabilities.
-              </p>
 
               <div className="mil-accordion-group mil-up mil-mb-30">
                 <div className="mil-accordion-menu">
@@ -358,7 +746,7 @@ export default function Page() {
                   <div className="mil-symbol"><span className="mil-plus">+</span><span className="mil-minus">-</span></div>
                 </div>
                 <div className="mil-accordion-content">
-                  <p className="mil-light-soft">Received the Entry Certificate in Business Analysis (ECBA) from the International Institute of Business Analysis (IIBA).</p>
+                  <p className="mil-dark-soft">Received the Entry Certificate in Business Analysis (ECBA) from the International Institute of Business Analysis (IIBA).</p>
                 </div>
               </div>
 
@@ -368,7 +756,7 @@ export default function Page() {
                   <div className="mil-symbol"><span className="mil-plus">+</span><span className="mil-minus">-</span></div>
                 </div>
                 <div className="mil-accordion-content">
-                  <p className="mil-light-soft">Led my collegiate cricket squad in state-level championships, refining skills in leadership, strategy, and team cohesion.</p>
+                  <p className="mil-dark-soft">Led my collegiate cricket squad in state-level championships, refining skills in leadership, strategy, and team cohesion.</p>
                 </div>
               </div>
 
@@ -378,7 +766,7 @@ export default function Page() {
                   <div className="mil-symbol"><span className="mil-plus">+</span><span className="mil-minus">-</span></div>
                 </div>
                 <div className="mil-accordion-content">
-                  <p className="mil-light-soft">Served as the lead coordinator of operations for our college's premier tech festival with over 2000 attendees.</p>
+                  <p className="mil-dark-soft">Served as the lead coordinator of operations for our college's premier tech festival with over 2000 attendees.</p>
                 </div>
               </div>
 
@@ -388,7 +776,7 @@ export default function Page() {
                   <div className="mil-symbol"><span className="mil-plus">+</span><span className="mil-minus">-</span></div>
                 </div>
                 <div className="mil-accordion-content">
-                  <p className="mil-light-soft">Completed a rigorous internship focusing on building analytical dashboards and querying large relational databases.</p>
+                  <p className="mil-dark-soft">Completed a rigorous internship focusing on building analytical dashboards and querying large relational databases.</p>
                 </div>
               </div>
 
@@ -398,42 +786,52 @@ export default function Page() {
                   <div className="mil-symbol"><span className="mil-plus">+</span><span className="mil-minus">-</span></div>
                 </div>
                 <div className="mil-accordion-content">
-                  <p className="mil-light-soft">Obtained specialization certificates for Tableau, SQL, Python, and Power BI tools.</p>
+                  <p className="mil-dark-soft">Obtained specialization certificates for Tableau, SQL, Python, and Power BI tools.</p>
                 </div>
               </div>
             </div>
 
             <div className="col-lg-6 mil-mb-60">
               <h2 className="mil-up mil-mb-60">My Learning Journey</h2>
-              <div className="mil-timeline">
-                <div className="mil-timeline-item mil-up" style={{ paddingLeft: "25px", borderLeft: "2px solid var(--accent, #ff9800)", position: "relative", marginBottom: "20px" }}>
-                  <div style={{ position: "absolute", left: "-7px", top: "5px", width: "12px", height: "12px", borderRadius: "50%", background: "var(--accent, #ff9800)" }}></div>
-                  <h5 className="mil-mb-5">2021</h5>
-                  <p className="mil-light-soft text-sm">Worked as Digital Consultant, learning analytic toolsets and client servicing.</p>
+              <div className="custom-timeline">
+                <div className="custom-timeline-item mil-up">
+                  <div className="custom-timeline-dot"></div>
+                  <div className="custom-timeline-card">
+                    <div className="custom-timeline-year">2021</div>
+                    <h5 className="custom-timeline-title">Digital Consultant</h5>
+                  </div>
                 </div>
 
-                <div className="mil-timeline-item mil-up" style={{ paddingLeft: "25px", borderLeft: "2px solid var(--accent, #ff9800)", position: "relative", marginBottom: "20px" }}>
-                  <div style={{ position: "absolute", left: "-7px", top: "5px", width: "12px", height: "12px", borderRadius: "50%", background: "var(--accent, #ff9800)" }}></div>
-                  <h5 className="mil-mb-5">2022</h5>
-                  <p className="mil-light-soft text-sm">Transitioned to Business Analyst role at Webbyacad Software Solutions.</p>
+                <div className="custom-timeline-item mil-up">
+                  <div className="custom-timeline-dot"></div>
+                  <div className="custom-timeline-card">
+                    <div className="custom-timeline-year">2022</div>
+                    <h5 className="custom-timeline-title">Business Analyst</h5>
+                  </div>
                 </div>
 
-                <div className="mil-timeline-item mil-up" style={{ paddingLeft: "25px", borderLeft: "2px solid var(--accent, #ff9800)", position: "relative", marginBottom: "20px" }}>
-                  <div style={{ position: "absolute", left: "-7px", top: "5px", width: "12px", height: "12px", borderRadius: "50%", background: "var(--accent, #ff9800)" }}></div>
-                  <h5 className="mil-mb-5">2024</h5>
-                  <p className="mil-light-soft text-sm">Moved to Ireland to pursue MSc Business Analytics at the University of Galway.</p>
+                <div className="custom-timeline-item mil-up">
+                  <div className="custom-timeline-dot"></div>
+                  <div className="custom-timeline-card">
+                    <div className="custom-timeline-year">2024</div>
+                    <h5 className="custom-timeline-title">MSc Business Analytics</h5>
+                  </div>
                 </div>
 
-                <div className="mil-timeline-item mil-up" style={{ paddingLeft: "25px", borderLeft: "2px solid var(--accent, #ff9800)", position: "relative", marginBottom: "20px" }}>
-                  <div style={{ position: "absolute", left: "-7px", top: "5px", width: "12px", height: "12px", borderRadius: "50%", background: "var(--accent, #ff9800)" }}></div>
-                  <h5 className="mil-mb-5">2025</h5>
-                  <p className="mil-light-soft text-sm">Earned the globally recognized ECBA (IIBA) certification.</p>
+                <div className="custom-timeline-item mil-up">
+                  <div className="custom-timeline-dot"></div>
+                  <div className="custom-timeline-card">
+                    <div className="custom-timeline-year">2025</div>
+                    <h5 className="custom-timeline-title">ECBA Certification</h5>
+                  </div>
                 </div>
 
-                <div className="mil-timeline-item mil-up" style={{ paddingLeft: "25px", borderLeft: "2px solid var(--accent, #ff9800)", position: "relative" }}>
-                  <div style={{ position: "absolute", left: "-7px", top: "5px", width: "12px", height: "12px", borderRadius: "50%", background: "var(--accent, #ff9800)" }}></div>
-                  <h5 className="mil-mb-5">2026 &amp; Beyond</h5>
-                  <p className="mil-light-soft text-sm">Seeking full-time Business Analyst / Data Analyst opportunities in Ireland.</p>
+                <div className="custom-timeline-item mil-up">
+                  <div className="custom-timeline-dot"></div>
+                  <div className="custom-timeline-card">
+                    <div className="custom-timeline-year">2026</div>
+                    <h5 className="custom-timeline-title">Business Analyst Opportunities in Ireland</h5>
+                  </div>
                 </div>
               </div>
             </div>
@@ -442,48 +840,122 @@ export default function Page() {
       </section>
 
       {/* Certifications Showcase */}
-      <section className="mil-p-120-90 mil-soft-bg">
+      <section className="mil-p-120-90 mil-soft-bg" style={{ position: "relative" }}>
+        <style>{`
+          .custom-cert-card {
+            background: #ffffff;
+            border: 1px solid rgba(0, 0, 0, 0.05);
+            border-radius: 16px;
+            padding: 40px 30px;
+            text-align: center;
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.02);
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none !important;
+          }
+          .custom-cert-card:hover {
+            transform: translateY(-8px);
+            border-color: #ff9800;
+            box-shadow: 0 20px 40px rgba(255, 152, 0, 0.12);
+          }
+          .custom-cert-icon {
+            width: 64px;
+            height: 64px;
+            border-radius: 50%;
+            background: rgba(255, 152, 0, 0.08);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
+            color: #ff9800;
+            font-size: 24px;
+            transition: all 0.4s ease;
+          }
+          .custom-cert-card:hover .custom-cert-icon {
+            background: #ff9800;
+            color: #ffffff;
+            transform: scale(1.1);
+          }
+          .custom-cert-title {
+            font-size: 18px;
+            font-weight: 600;
+            color: #1a1a1a;
+            margin-bottom: 12px;
+            text-transform: none;
+          }
+          .custom-cert-desc {
+            font-size: 13px;
+            color: #666;
+            margin-bottom: 0;
+            line-height: 1.5;
+          }
+        `}</style>
         <div className="container">
           <div className="row">
             <div className="col-lg-12">
-              <h2 className="mil-up mil-mb-60 mil-center">Certification Showcase</h2>
+              <h2 className="mil-up mil-mb-20 mil-center">Certification Showcase</h2>
+              <p className="mil-dark-soft mil-up mil-mb-60 mil-center" style={{ maxWidth: "600px", margin: "0 auto 60px" }}>
+                A collection of my professional credentials and academic specializations in business analysis, data visualization, and analytics.
+              </p>
             </div>
           </div>
           <div className="row justify-content-center">
             <div className="col-md-4 col-sm-6 mil-mb-30">
-              <a href="#." className="mil-service-card-sm mil-up mil-center" style={{ display: "block", textDecoration: "none", padding: "40px" }}>
-                <h5 className="mil-mb-10">ECBA (IIBA)</h5>
-                <p className="mil-light-soft mil-text-sm mil-mb-0">Entry Certificate in Business Analysis</p>
+              <a href="#." className="custom-cert-card mil-up">
+                <div className="custom-cert-icon">
+                  <i className="fas fa-award"></i>
+                </div>
+                <h5 className="custom-cert-title">ECBA (IIBA)</h5>
+                <p className="custom-cert-desc">Entry Certificate in Business Analysis</p>
               </a>
             </div>
             <div className="col-md-4 col-sm-6 mil-mb-30">
-              <a href="#." className="mil-service-card-sm mil-up mil-center" style={{ display: "block", textDecoration: "none", padding: "40px" }}>
-                <h5 className="mil-mb-10">Tableau</h5>
-                <p className="mil-light-soft mil-text-sm mil-mb-0">Desktop Specialist &amp; Visual Analytics</p>
+              <a href="#." className="custom-cert-card mil-up">
+                <div className="custom-cert-icon">
+                  <i className="fas fa-chart-bar"></i>
+                </div>
+                <h5 className="custom-cert-title">Tableau</h5>
+                <p className="custom-cert-desc">Desktop Specialist &amp; Visual Analytics</p>
               </a>
             </div>
             <div className="col-md-4 col-sm-6 mil-mb-30">
-              <a href="#." className="mil-service-card-sm mil-up mil-center" style={{ display: "block", textDecoration: "none", padding: "40px" }}>
-                <h5 className="mil-mb-10">SQL</h5>
-                <p className="mil-light-soft mil-text-sm mil-mb-0">Advanced Querying &amp; Relational Databases</p>
+              <a href="#." className="custom-cert-card mil-up">
+                <div className="custom-cert-icon">
+                  <i className="fas fa-database"></i>
+                </div>
+                <h5 className="custom-cert-title">SQL</h5>
+                <p className="custom-cert-desc">Advanced Querying &amp; Relational Databases</p>
               </a>
             </div>
             <div className="col-md-4 col-sm-6 mil-mb-30">
-              <a href="#." className="mil-service-card-sm mil-up mil-center" style={{ display: "block", textDecoration: "none", padding: "40px" }}>
-                <h5 className="mil-mb-10">Power BI</h5>
-                <p className="mil-light-soft mil-text-sm mil-mb-0">Business Intelligence &amp; Dashboard Design</p>
+              <a href="#." className="custom-cert-card mil-up">
+                <div className="custom-cert-icon">
+                  <i className="fas fa-chart-line"></i>
+                </div>
+                <h5 className="custom-cert-title">Power BI</h5>
+                <p className="custom-cert-desc">Business Intelligence &amp; Dashboard Design</p>
               </a>
             </div>
             <div className="col-md-4 col-sm-6 mil-mb-30">
-              <a href="#." className="mil-service-card-sm mil-up mil-center" style={{ display: "block", textDecoration: "none", padding: "40px" }}>
-                <h5 className="mil-mb-10">Python</h5>
-                <p className="mil-light-soft mil-text-sm mil-mb-0">Data Processing, Pandas, &amp; Visualization</p>
+              <a href="#." className="custom-cert-card mil-up">
+                <div className="custom-cert-icon">
+                  <i className="fab fa-python"></i>
+                </div>
+                <h5 className="custom-cert-title">Python</h5>
+                <p className="custom-cert-desc">Data Processing, Pandas, &amp; Visualization</p>
               </a>
             </div>
             <div className="col-md-4 col-sm-6 mil-mb-30">
-              <a href="#." className="mil-service-card-sm mil-up mil-center" style={{ display: "block", textDecoration: "none", padding: "40px" }}>
-                <h5 className="mil-mb-10">Data Analytics</h5>
-                <p className="mil-light-soft mil-text-sm mil-mb-0">Various Specialized Academic Credentials</p>
+              <a href="#." className="custom-cert-card mil-up">
+                <div className="custom-cert-icon">
+                  <i className="fas fa-calculator"></i>
+                </div>
+                <h5 className="custom-cert-title">Data Analytics</h5>
+                <p className="custom-cert-desc">Various Specialized Academic Credentials</p>
               </a>
             </div>
           </div>

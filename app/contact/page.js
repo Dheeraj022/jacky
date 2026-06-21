@@ -38,7 +38,7 @@ export default function Page() {
         <div className="mil-banner-content mil-center mil-up">
           <div className="container">
             <ul className="mil-breadcrumbs mil-center mil-mb-60">
-              <li><a href="/">Homepage</a></li>
+              <li><a href="/">Home</a></li>
               <li><a href="/contact">Contact</a></li>
             </ul>
             <h1 className="mil-mb-60">Let's Connect &amp; Collaborate!</h1>

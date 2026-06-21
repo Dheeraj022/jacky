@@ -269,19 +269,76 @@ export default function Page() {
                 </div>
               </div>
 
-              {/* Centered Buttons with proper gap and black icons */}
-              <div className="mil-buttons-row mil-up mil-mb-50" style={{ display: "flex", flexWrap: "wrap", gap: "25px", justifyContent: "center", alignItems: "center" }}>
-                <a href="/about#resume" className="mil-button mil-arrow-place" style={{ padding: "0 20px 0 25px", display: "inline-flex", alignItems: "center" }}>
-                  <i className="far fa-file-alt" style={{ marginRight: "10px", fontSize: "14px", color: "#000", display: "inline-flex", alignItems: "center", justifyContent: "center" }}></i>
-                  <span>Download Resume</span>
+              {/* Custom Hero Button styles & layout */}
+              <style>{`
+                .home-btn-group {
+                  display: flex;
+                  justify-content: center;
+                  flex-wrap: wrap;
+                  gap: 16px;
+                  margin-top: 35px;
+                  margin-bottom: 50px;
+                }
+                .custom-home-btn {
+                  display: inline-flex;
+                  align-items: center;
+                  justify-content: center;
+                  padding: 14px 28px;
+                  font-size: 13px;
+                  font-weight: 600;
+                  text-transform: uppercase;
+                  letter-spacing: 1px;
+                  border-radius: 30px;
+                  text-decoration: none !important;
+                  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+                  cursor: pointer;
+                }
+                .home-btn-primary {
+                  background: #ff9800;
+                  color: #000000 !important;
+                  border: 1px solid #ff9800;
+                }
+                .home-btn-primary:hover {
+                  background: #f57c00;
+                  border-color: #f57c00;
+                  transform: translateY(-3px);
+                  box-shadow: 0 8px 25px rgba(255, 152, 0, 0.35);
+                }
+                .home-btn-secondary {
+                  background: transparent;
+                  color: #ff9800 !important;
+                  border: 1px solid rgba(255, 152, 0, 0.4);
+                }
+                .home-btn-secondary:hover {
+                  background: rgba(255, 152, 0, 0.08);
+                  border-color: #ff9800;
+                  transform: translateY(-3px);
+                  box-shadow: 0 8px 25px rgba(255, 152, 0, 0.15);
+                }
+                .home-btn-tertiary {
+                  background: rgba(255, 255, 255, 0.06);
+                  color: #ffffff !important;
+                  border: 1px solid rgba(255, 255, 255, 0.12);
+                }
+                .home-btn-tertiary:hover {
+                  background: rgba(255, 255, 255, 0.12);
+                  border-color: rgba(255, 255, 255, 0.3);
+                  transform: translateY(-3px);
+                  box-shadow: 0 8px 25px rgba(255, 255, 255, 0.1);
+                }
+              `}</style>
+              <div className="home-btn-group mil-up">
+                <a href="/about#resume" className="custom-home-btn home-btn-primary">
+                  <i className="far fa-file-alt" style={{ marginRight: "8px", fontSize: "14px" }}></i>
+                  Download Resume
                 </a>
-                <a href="/projects" className="mil-button mil-arrow-place" style={{ padding: "0 20px 0 25px", display: "inline-flex", alignItems: "center" }}>
-                  <i className="fas fa-chart-bar" style={{ marginRight: "10px", fontSize: "14px", color: "#000", display: "inline-flex", alignItems: "center", justifyContent: "center" }}></i>
-                  <span>View Projects</span>
+                <a href="/projects" className="custom-home-btn home-btn-secondary">
+                  <i className="fas fa-chart-bar" style={{ marginRight: "8px", fontSize: "14px" }}></i>
+                  View Projects
                 </a>
-                <a href="/contact" className="mil-button mil-arrow-place" style={{ padding: "0 20px 0 25px", display: "inline-flex", alignItems: "center" }}>
-                  <i className="fas fa-envelope" style={{ marginRight: "10px", fontSize: "14px", color: "#000", display: "inline-flex", alignItems: "center", justifyContent: "center" }}></i>
-                  <span>Contact Me</span>
+                <a href="/contact" className="custom-home-btn home-btn-tertiary">
+                  <i className="fas fa-envelope" style={{ marginRight: "8px", fontSize: "14px" }}></i>
+                  Contact Me
                 </a>
               </div>
 
