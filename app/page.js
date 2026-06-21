@@ -90,7 +90,7 @@ export default function Page() {
 
           <div className="container">
             <div className="mil-banner-content mil-center mil-up" style={{ padding: "0 0" }}>
-              
+
               {/* Top: Header Titles */}
               <div className="row justify-content-center mil-mb-40">
                 <div className="col-lg-8">
@@ -354,7 +354,7 @@ export default function Page() {
                     textAlign: "center"
                   }}>
                     <p className="mil-light-soft mil-mb-0" style={{ fontSize: "14px" }}>
-                      Watch this videos to understand How i am the best Candidate for you organisations.
+                      Watch this videos to understand How i am the best candidate for your organisations.
                     </p>
                   </div>
                 </div>
