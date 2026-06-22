@@ -533,69 +533,180 @@ export default function Page() {
       </section>
 
       {/* Core Skills Section */}
-      <section className="mil-p-120-60 mil-soft-bg">
+      <section className="mil-p-120-60 custom-skills-section" style={{ background: "#f8f9fa" }}>
+        <style>{`
+          .custom-skill-card {
+            background: #ffffff;
+            border-radius: 20px;
+            padding: 40px 32px;
+            box-shadow: 0 4px 24px rgba(0, 0, 0, 0.05);
+            border: 1px solid rgba(0, 0, 0, 0.06);
+            height: 100%;
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+          }
+          .custom-skill-card:hover {
+            transform: translateY(-8px);
+            border-color: rgba(255, 152, 0, 0.3);
+            box-shadow: 0 16px 40px rgba(255, 152, 0, 0.1);
+          }
+          .custom-icon-box {
+            width: 58px;
+            height: 58px;
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 24px;
+            background: rgba(255, 152, 0, 0.1);
+          }
+          .custom-icon-box i {
+            color: #ff9800;
+            font-size: 24px;
+          }
+          .skills-list-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 24px;
+          }
+          .skill-badge {
+            display: inline-flex;
+            align-items: center;
+            padding: 8px 16px;
+            border-radius: 30px;
+            font-size: 13px;
+            font-weight: 500;
+            line-height: 1.2;
+            color: rgba(0, 0, 0, 0.7);
+            border: 1px solid rgba(255, 152, 0, 0.1);
+            background: rgba(255, 152, 0, 0.05);
+            transition: all 0.25s ease;
+            cursor: default;
+          }
+          .skill-badge i {
+            font-size: 11px;
+            margin-right: 8px;
+            color: #ff9800;
+            transition: color 0.25s ease;
+          }
+          .skill-badge:hover {
+            background: #ff9800;
+            color: #ffffff;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(255, 152, 0, 0.25);
+          }
+          .skill-badge:hover i {
+            color: #ffffff;
+          }
+        `}</style>
         <div className="container">
           <div className="row">
             <div className="col-lg-12">
               <h2 className="mil-up mil-mb-60 mil-center">Core Skills Matrix</h2>
             </div>
           </div>
-          <div className="row">
-            <div className="col-lg-3 col-md-6 mil-mb-60">
-              <div className="mil-service-card-lg mil-up" style={{ height: "100%", padding: "40px 30px" }}>
-                <h4 className="mil-mb-30">Business Analysis</h4>
-                <ul className="mil-service-list" style={{ paddingLeft: 0 }}>
-                  <li>Requirement Gathering</li>
-                  <li>User Stories (Agile)</li>
-                  <li>BRD / FRD Drafting</li>
-                  <li>BPMN Process Mapping</li>
-                  <li>Process Improvement</li>
-                  <li>Stakeholder Management</li>
-                </ul>
+          <div className="row" style={{ rowGap: "30px" }}>
+            
+            {/* Column 1: Business Analysis */}
+            <div className="col-lg-3 col-md-6 mil-mb-30">
+              <div className="custom-skill-card mil-up">
+                <div className="custom-icon-box">
+                  <i className="fas fa-project-diagram"></i>
+                </div>
+                <h4 style={{ fontWeight: 700, fontSize: "19px", color: "rgba(0,0,0,0.85)" }}>Business Analysis</h4>
+                <div className="skills-list-container">
+                  {[
+                    "Requirement Gathering",
+                    "User Stories (Agile)",
+                    "BRD / FRD Drafting",
+                    "BPMN Process Mapping",
+                    "Process Improvement",
+                    "Stakeholder Management"
+                  ].map((skill, idx) => (
+                    <span key={idx} className="skill-badge">
+                      <i className="fas fa-check-circle"></i>
+                      {skill}
+                    </span>
+                  ))}
+                </div>
               </div>
             </div>
 
-            <div className="col-lg-3 col-md-6 mil-mb-60">
-              <div className="mil-service-card-lg mil-up" style={{ height: "100%", padding: "40px 30px" }}>
-                <h4 className="mil-mb-30">Data Analytics</h4>
-                <ul className="mil-service-list" style={{ paddingLeft: 0 }}>
-                  <li>SQL Querying</li>
-                  <li>Power BI Dashboarding</li>
-                  <li>Tableau Visualization</li>
-                  <li>Python Programming</li>
-                  <li>Pandas &amp; NumPy</li>
-                  <li>Advanced MS Excel</li>
-                </ul>
+            {/* Column 2: Data Analytics */}
+            <div className="col-lg-3 col-md-6 mil-mb-30">
+              <div className="custom-skill-card mil-up">
+                <div className="custom-icon-box">
+                  <i className="fas fa-database"></i>
+                </div>
+                <h4 style={{ fontWeight: 700, fontSize: "19px", color: "rgba(0,0,0,0.85)" }}>Data Analytics</h4>
+                <div className="skills-list-container">
+                  {[
+                    "SQL Querying",
+                    "Power BI Dashboarding",
+                    "Tableau Visualization",
+                    "Python Programming",
+                    "Pandas & NumPy",
+                    "Advanced MS Excel"
+                  ].map((skill, idx) => (
+                    <span key={idx} className="skill-badge">
+                      <i className="fas fa-chart-line"></i>
+                      {skill}
+                    </span>
+                  ))}
+                </div>
               </div>
             </div>
 
-            <div className="col-lg-3 col-md-6 mil-mb-60">
-              <div className="mil-service-card-lg mil-up" style={{ height: "100%", padding: "40px 30px" }}>
-                <h4 className="mil-mb-30">Project Management</h4>
-                <ul className="mil-service-list" style={{ paddingLeft: 0 }}>
-                  <li>Agile Frameworks</li>
-                  <li>Scrum Methodologies</li>
-                  <li>Jira Workflow Management</li>
-                  <li>Confluence Documentation</li>
-                  <li>Sprint Planning</li>
-                  <li>Task Prioritization</li>
-                </ul>
+            {/* Column 3: Project Management */}
+            <div className="col-lg-3 col-md-6 mil-mb-30">
+              <div className="custom-skill-card mil-up">
+                <div className="custom-icon-box">
+                  <i className="fas fa-tasks"></i>
+                </div>
+                <h4 style={{ fontWeight: 700, fontSize: "19px", color: "rgba(0,0,0,0.85)" }}>Project Management</h4>
+                <div className="skills-list-container">
+                  {[
+                    "Agile Frameworks",
+                    "Scrum Methodologies",
+                    "Jira Workflow Management",
+                    "Confluence Documentation",
+                    "Sprint Planning",
+                    "Task Prioritization"
+                  ].map((skill, idx) => (
+                    <span key={idx} className="skill-badge">
+                      <i className="fas fa-calendar-check"></i>
+                      {skill}
+                    </span>
+                  ))}
+                </div>
               </div>
             </div>
 
-            <div className="col-lg-3 col-md-6 mil-mb-60">
-              <div className="mil-service-card-lg mil-up" style={{ height: "100%", padding: "40px 30px" }}>
-                <h4 className="mil-mb-30">Communication</h4>
-                <ul className="mil-service-list" style={{ paddingLeft: 0 }}>
-                  <li>Client Meetings</li>
-                  <li>Presentations</li>
-                  <li>Workshop Facilitation</li>
-                  <li>Technical Documentation</li>
-                  <li>Cross-Functional Alignment</li>
-                  <li>Reporting Delivery</li>
-                </ul>
+            {/* Column 4: Communication */}
+            <div className="col-lg-3 col-md-6 mil-mb-30">
+              <div className="custom-skill-card mil-up">
+                <div className="custom-icon-box">
+                  <i className="fas fa-comments"></i>
+                </div>
+                <h4 style={{ fontWeight: 700, fontSize: "19px", color: "rgba(0,0,0,0.85)" }}>Communication</h4>
+                <div className="skills-list-container">
+                  {[
+                    "Client Meetings",
+                    "Presentations",
+                    "Workshop Facilitation",
+                    "Technical Documentation",
+                    "Cross-Functional Alignment",
+                    "Reporting Delivery"
+                  ].map((skill, idx) => (
+                    <span key={idx} className="skill-badge">
+                      <i className="fas fa-comments"></i>
+                      {skill}
+                    </span>
+                  ))}
+                </div>
               </div>
             </div>
+
           </div>
         </div>
       </section>
