@@ -44,7 +44,7 @@ export default function Page() {
             <div className="row justify-content-between mil-mb-60">
               <div className="col-lg-5">
                 <h3 className="mil-up mil-mb-30">Case Study Overview</h3>
-                <p className="mil-up mil-light-soft">
+                <p className="mil-up mil-dark-soft">
                   Segmenting a retail client's active customer base to target specific cohorts and design optimized, personalized promotional campaigns.
                 </p>
               </div>
@@ -52,13 +52,13 @@ export default function Page() {
                 <div className="row">
                   <div className="col-md-6 mil-mb-30">
                     <h5 className="mil-up mil-mb-15" style={{ color: "var(--accent, #ff9800)" }}>Problem Statement</h5>
-                    <p className="mil-up mil-text-sm mil-light-soft">
+                    <p className="mil-up mil-text-sm mil-dark-soft">
                       Group customers using transaction behavior to increase promotional email response rates and customer lifetime value (LTV).
                     </p>
                   </div>
                   <div className="col-md-6 mil-mb-30">
                     <h5 className="mil-up mil-mb-15" style={{ color: "var(--accent, #ff9800)" }}>Analytical Focus</h5>
-                    <p className="mil-up mil-text-sm mil-light-soft">
+                    <p className="mil-up mil-text-sm mil-dark-soft">
                       Developing RFM (Recency, Frequency, Monetary) analytics models in Python and publishing cluster dashboards in Tableau.
                     </p>
                   </div>
@@ -103,7 +103,7 @@ export default function Page() {
                 <i className="fab fa-github" style={{ fontSize: "16px" }}></i>
                 <span>View on GitHub</span>
               </a>
-              <a href="#." className="mil-link mil-dark mil-arrow-place mil-disabled">
+              <a href="#none" className="mil-link mil-dark mil-arrow-place mil-disabled">
                 <span>Next project</span>
               </a>
             </div>

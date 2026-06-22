@@ -44,7 +44,7 @@ export default function Page() {
             <div className="row justify-content-between mil-mb-60">
               <div className="col-lg-5">
                 <h3 className="mil-up mil-mb-30">Case Study Overview</h3>
-                <p className="mil-up mil-light-soft">
+                <p className="mil-up mil-dark-soft">
                   Building automated data pipelines and machine learning classifiers to predict customer cancellations (churn) for a subscription-based digital platform.
                 </p>
               </div>
@@ -52,13 +52,13 @@ export default function Page() {
                 <div className="row">
                   <div className="col-md-6 mil-mb-30">
                     <h5 className="mil-up mil-mb-15" style={{ color: "var(--accent, #ff9800)" }}>Problem Statement</h5>
-                    <p className="mil-up mil-text-sm mil-light-soft">
+                    <p className="mil-up mil-text-sm mil-dark-soft">
                       Proactively identify active subscribers who are likely to cancel their membership in the upcoming month.
                     </p>
                   </div>
                   <div className="col-md-6 mil-mb-30">
                     <h5 className="mil-up mil-mb-15" style={{ color: "var(--accent, #ff9800)" }}>Analytical Focus</h5>
-                    <p className="mil-up mil-text-sm mil-light-soft">
+                    <p className="mil-up mil-text-sm mil-dark-soft">
                       Feature engineering on activity logs, training classification models, and mapping model parameters for business reviews.
                     </p>
                   </div>

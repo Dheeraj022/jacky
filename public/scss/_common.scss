@@ -611,6 +611,8 @@ breadcrumbs
     display: inline-flex;
     align-items: center;
     position: relative;
+    flex-wrap: wrap;
+    row-gap: 10px;
 
     &:before {
         content: '';

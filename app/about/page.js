@@ -392,11 +392,11 @@ export default function Page() {
               Get direct access to my comprehensive curriculum vitae, cover letter, or view my up-to-date professional profile on LinkedIn.
             </p>
             <div className="resume-btn-group">
-              <a href="#." className="custom-resume-btn btn-pdf-resume">
+              <a href="#none" className="custom-resume-btn btn-pdf-resume">
                 <i className="fas fa-file-pdf" style={{ marginRight: "8px", fontSize: "15px" }}></i>
                 PDF Resume
               </a>
-              <a href="#." className="custom-resume-btn btn-cover-letter">
+              <a href="#none" className="custom-resume-btn btn-cover-letter">
                 <i className="fas fa-file-alt" style={{ marginRight: "8px", fontSize: "15px" }}></i>
                 Cover Letter
               </a>
@@ -415,7 +415,7 @@ export default function Page() {
           <div className="row justify-content-between">
             <div className="col-lg-4 mil-mb-60">
               <h2 className="mil-up mil-mb-30">Professional <br />Experience</h2>
-              <p className="mil-light-soft mil-up mil-mb-30">
+              <p className="mil-dark-soft mil-up mil-mb-30">
                 Over three years of corporate experience driving digital transformation initiatives, managing requirements workflows, and providing insights through reporting.
               </p>
             </div>
@@ -483,7 +483,7 @@ export default function Page() {
           <div className="row justify-content-between">
             <div className="col-lg-4 mil-mb-60">
               <h2 className="mil-up mil-mb-30">Education &amp; <br />Academic Path</h2>
-              <p className="mil-light-soft mil-up mil-mb-30">
+              <p className="mil-dark-soft mil-up mil-mb-30">
                 Equipped with specialized postgraduate training in analytics from Ireland and foundation management credentials.
               </p>
             </div>
@@ -905,7 +905,7 @@ export default function Page() {
           </div>
           <div className="row justify-content-center">
             <div className="col-md-4 col-sm-6 mil-mb-30">
-              <a href="#." className="custom-cert-card mil-up">
+              <a href="#none" className="custom-cert-card mil-up">
                 <div className="custom-cert-icon">
                   <i className="fas fa-award"></i>
                 </div>
@@ -914,7 +914,7 @@ export default function Page() {
               </a>
             </div>
             <div className="col-md-4 col-sm-6 mil-mb-30">
-              <a href="#." className="custom-cert-card mil-up">
+              <a href="#none" className="custom-cert-card mil-up">
                 <div className="custom-cert-icon">
                   <i className="fas fa-chart-bar"></i>
                 </div>
@@ -923,7 +923,7 @@ export default function Page() {
               </a>
             </div>
             <div className="col-md-4 col-sm-6 mil-mb-30">
-              <a href="#." className="custom-cert-card mil-up">
+              <a href="#none" className="custom-cert-card mil-up">
                 <div className="custom-cert-icon">
                   <i className="fas fa-database"></i>
                 </div>
@@ -932,7 +932,7 @@ export default function Page() {
               </a>
             </div>
             <div className="col-md-4 col-sm-6 mil-mb-30">
-              <a href="#." className="custom-cert-card mil-up">
+              <a href="#none" className="custom-cert-card mil-up">
                 <div className="custom-cert-icon">
                   <i className="fas fa-chart-line"></i>
                 </div>
@@ -941,7 +941,7 @@ export default function Page() {
               </a>
             </div>
             <div className="col-md-4 col-sm-6 mil-mb-30">
-              <a href="#." className="custom-cert-card mil-up">
+              <a href="#none" className="custom-cert-card mil-up">
                 <div className="custom-cert-icon">
                   <i className="fab fa-python"></i>
                 </div>
@@ -950,7 +950,7 @@ export default function Page() {
               </a>
             </div>
             <div className="col-md-4 col-sm-6 mil-mb-30">
-              <a href="#." className="custom-cert-card mil-up">
+              <a href="#none" className="custom-cert-card mil-up">
                 <div className="custom-cert-icon">
                   <i className="fas fa-calculator"></i>
                 </div>

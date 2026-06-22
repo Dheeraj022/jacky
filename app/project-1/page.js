@@ -44,7 +44,7 @@ export default function Page() {
             <div className="row justify-content-between mil-mb-60">
               <div className="col-lg-5">
                 <h3 className="mil-up mil-mb-30">Case Study Overview</h3>
-                <p className="mil-up mil-light-soft">
+                <p className="mil-up mil-dark-soft">
                   Exploring global transmission rates, recovery rates, and regional hotspots during different waves of the COVID-19 pandemic to assist policy analysis and health research.
                 </p>
               </div>
@@ -52,13 +52,13 @@ export default function Page() {
                 <div className="row">
                   <div className="col-md-6 mil-mb-30">
                     <h5 className="mil-up mil-mb-15" style={{ color: "var(--accent, #ff9800)" }}>Problem Statement</h5>
-                    <p className="mil-up mil-text-sm mil-light-soft">
+                    <p className="mil-up mil-text-sm mil-dark-soft">
                       Analyze global COVID-19 trends to understand infection spreads and identify critical zones requiring medical aid or containment.
                     </p>
                   </div>
                   <div className="col-md-6 mil-mb-30">
                     <h5 className="mil-up mil-mb-15" style={{ color: "var(--accent, #ff9800)" }}>Analytical Focus</h5>
-                    <p className="mil-up mil-text-sm mil-light-soft">
+                    <p className="mil-up mil-text-sm mil-dark-soft">
                       Processing, merging, and cleaning massive CSV and JSON transactional datasets containing infection records and hospital charts.
                     </p>
                   </div>
@@ -93,7 +93,7 @@ export default function Page() {
 
             {/* Bottom Nav */}
             <div className="mil-works-nav mil-up" style={{ marginTop: "120px" }}>
-              <a href="#." className="mil-link mil-dark mil-arrow-place mil-icon-left mil-disabled">
+              <a href="#none" className="mil-link mil-dark mil-arrow-place mil-icon-left mil-disabled">
                 <span>Prev project</span>
               </a>
               <a href="/projects" className="mil-link mil-dark">

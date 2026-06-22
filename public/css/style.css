@@ -753,6 +753,9 @@ breadcrumbs
       -ms-flex-align: center;
           align-items: center;
   position: relative;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  row-gap: 10px;
 }
 .mil-breadcrumbs:before {
   content: "";
@@ -3348,6 +3351,9 @@ portfolio
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  gap: 20px;
 }
 .mil-works-nav .mil-disabled {
   opacity: 0.2;

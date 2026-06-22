@@ -44,7 +44,7 @@ export default function Page() {
             <div className="row justify-content-between mil-mb-60">
               <div className="col-lg-5">
                 <h3 className="mil-up mil-mb-30">Case Study Overview</h3>
-                <p className="mil-up mil-light-soft">
+                <p className="mil-up mil-dark-soft">
                   Optimizing patient intake procedures and resource utilization across multiple clinical departments at a regional medical center.
                 </p>
               </div>
@@ -52,13 +52,13 @@ export default function Page() {
                 <div className="row">
                   <div className="col-md-6 mil-mb-30">
                     <h5 className="mil-up mil-mb-15" style={{ color: "var(--accent, #ff9800)" }}>Problem Statement</h5>
-                    <p className="mil-up mil-text-sm mil-light-soft">
+                    <p className="mil-up mil-text-sm mil-dark-soft">
                       Evaluate clinical queues to reduce patient waiting times, standardize triage, and streamline shift staffing.
                     </p>
                   </div>
                   <div className="col-md-6 mil-mb-30">
                     <h5 className="mil-up mil-mb-15" style={{ color: "var(--accent, #ff9800)" }}>Analytical Focus</h5>
-                    <p className="mil-up mil-text-sm mil-light-soft">
+                    <p className="mil-up mil-text-sm mil-dark-soft">
                       Designing SQL queries to pull patient timestamps, clean admission logs, and identify bottlenecks in patient workflows.
                     </p>
                   </div>

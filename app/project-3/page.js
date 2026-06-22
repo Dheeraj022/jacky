@@ -44,7 +44,7 @@ export default function Page() {
             <div className="row justify-content-between mil-mb-60">
               <div className="col-lg-5">
                 <h3 className="mil-up mil-mb-30">Case Study Overview</h3>
-                <p className="mil-up mil-light-soft">
+                <p className="mil-up mil-dark-soft">
                   Analyzing loan applicant profiles and historical defaults to help a credit provider minimize non-performing loans (NPLs) and standardize credit score rules.
                 </p>
               </div>
@@ -52,13 +52,13 @@ export default function Page() {
                 <div className="row">
                   <div className="col-md-6 mil-mb-30">
                     <h5 className="mil-up mil-mb-15" style={{ color: "var(--accent, #ff9800)" }}>Problem Statement</h5>
-                    <p className="mil-up mil-text-sm mil-light-soft">
+                    <p className="mil-up mil-text-sm mil-dark-soft">
                       Identify applicant segments showing high tendencies of defaults, ensuring safer loan approvals.
                     </p>
                   </div>
                   <div className="col-md-6 mil-mb-30">
                     <h5 className="mil-up mil-mb-15" style={{ color: "var(--accent, #ff9800)" }}>Analytical Focus</h5>
-                    <p className="mil-up mil-text-sm mil-light-soft">
+                    <p className="mil-up mil-text-sm mil-dark-soft">
                       Structuring relational SQL schemas, filtering client segments, and modeling credit metrics using Python datasets.
                     </p>
                   </div>
