@@ -16,6 +16,9 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <head>
+        <meta name="google-site-verification" content="7S2B6HNIr8PgwD2WXYUt8UUYOHSyLr4A7_qv4k4ZbUk" />
+      </head>
+      <body>
         {/* We load jQuery, Swiper, Fancybox, and GSAP beforehand to ensure they are defined in window on hydration */}
         <Script src="/js/plugins/jquery.min.js" strategy="beforeInteractive" />
         <Script src="/js/plugins/swiper.min.js" strategy="beforeInteractive" />
@@ -25,8 +28,6 @@ export default function RootLayout({ children }) {
         <Script src="/js/plugins/ScrollTrigger.min.js" strategy="beforeInteractive" />
         <Script src="/js/plugins/ScrollTo.min.js" strategy="beforeInteractive" />
         <Script src="/js/main.js" strategy="afterInteractive" />
-      </head>
-      <body>
         <TransitionProvider>
           <AshleyEffect />
           {/* wrapper */}
