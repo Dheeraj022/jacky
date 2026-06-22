@@ -31,7 +31,7 @@ export default function Page() {
       <section className="mil-p-120-0" id="project">
         <div className="container mil-p-0-120">
           <div className="mil-image-frame mil-horizontal mil-up" style={{ borderRadius: "12px", overflow: "hidden" }}>
-            <img src="/img/works/2.jpg" alt="Healthcare Analytics" />
+            <img src="/img/works/2.png" alt="Healthcare Analytics" />
           </div>
           
           <div className="mil-info mil-up" style={{ display: "flex", flexWrap: "wrap", gap: "30px", marginTop: "30px" }}>

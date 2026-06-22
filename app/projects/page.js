@@ -16,7 +16,7 @@ const projectData = [
     impact: "Generated actionable insights on transmission trends and recovery rates.",
     link: "/project-1",
     github: "https://github.com/jacky4458?tab=repositories",
-    img: "/img/works/1.jpg"
+    img: "/img/works/1.png"
   },
   {
     id: 2,
@@ -29,7 +29,7 @@ const projectData = [
     impact: "Reduced patient waiting times by 14% and standardized triage.",
     link: "/project-2",
     github: "https://github.com/jacky4458?tab=repositories",
-    img: "/img/works/2.jpg"
+    img: "/img/works/2.png"
   },
   {
     id: 3,
@@ -42,7 +42,7 @@ const projectData = [
     impact: "Decreased non-performing loans by 8% and improved risk profiling.",
     link: "/project-3",
     github: "https://github.com/jacky4458?tab=repositories",
-    img: "/img/works/3.jpg"
+    img: "/img/works/3.png"
   },
   {
     id: 4,
@@ -55,7 +55,7 @@ const projectData = [
     impact: "Enabled marketing to target high-risk clients, saving 12% in churn.",
     link: "/project-4",
     github: "https://github.com/jacky4458?tab=repositories",
-    img: "/img/works/4.jpg"
+    img: "/img/works/4.png"
   },
   {
     id: 5,
@@ -68,7 +68,7 @@ const projectData = [
     impact: "Saved sales managers 8 hours weekly in manual spreadsheet compilation.",
     link: "/project-5",
     github: "https://github.com/jacky4458?tab=repositories",
-    img: "/img/works/5.jpg"
+    img: "/img/works/5.png"
   },
   {
     id: 6,
@@ -81,7 +81,7 @@ const projectData = [
     impact: "Boosted campaign response rate by 18% through target cohort selection.",
     link: "/project-6",
     github: "https://github.com/jacky4458?tab=repositories",
-    img: "/img/works/6.jpg"
+    img: "/img/works/6.png"
   },
   {
     id: 7,
@@ -225,11 +225,11 @@ export default function Page() {
                     <img
                       src={project.img}
                       alt={project.title}
-                      style={{ width: "100%", height: "100%", objectFit: "cover", transition: "transform 0.4s ease" }}
+                      style={{ width: "100%", height: "100%", objectFit: "cover", transition: "transform 0.4s ease", filter: "blur(3px)", transform: "scale(1.08)" }}
                     />
                     <div style={{
                       position: "absolute", inset: 0,
-                      background: "linear-gradient(to top, rgba(0,0,0,0.6) 0%, transparent 55%)"
+                      background: "rgba(0, 0, 0, 0.45)"
                     }}></div>
                     {/* Skill badges */}
                     <div style={{ position: "absolute", top: "14px", left: "14px", display: "flex", flexWrap: "wrap", gap: "6px" }}>

@@ -806,9 +806,9 @@ export default function Page() {
           {/* Project Cards Grid */}
           <div className="row" style={{ rowGap: "30px" }}>
             {[
-              { title: "COVID-19 Data Analysis", tags: ["Python", "Tableau"], impact: "Insights on global transmission & recovery trends", img: "/img/works/1.jpg", link: "/project-1" },
-              { title: "Healthcare Analytics", tags: ["SQL", "Power BI"], impact: "Reduced patient waiting times by 14%", img: "/img/works/2.jpg", link: "/project-2" },
-              { title: "Credit Risk Analysis", tags: ["Python", "SQL"], impact: "Decreased non-performing loans by 8%", img: "/img/works/3.jpg", link: "/project-3" },
+              { title: "COVID-19 Data Analysis", tags: ["Python", "Tableau"], impact: "Insights on global transmission & recovery trends", img: "/img/works/1.png", link: "/project-1" },
+              { title: "Healthcare Analytics", tags: ["SQL", "Power BI"], impact: "Reduced patient waiting times by 14%", img: "/img/works/2.png", link: "/project-2" },
+              { title: "Credit Risk Analysis", tags: ["Python", "SQL"], impact: "Decreased non-performing loans by 8%", img: "/img/works/3.png", link: "/project-3" },
             ].map((project, i) => (
               <div key={i} className="col-lg-4 col-md-6">
                 <a href={project.link} className="mil-up" style={{ display: "block", textDecoration: "none" }}>
@@ -826,12 +826,12 @@ export default function Page() {
                       <img
                         src={project.img}
                         alt={project.title}
-                        style={{ width: "100%", height: "100%", objectFit: "cover", transition: "transform 0.4s ease" }}
+                        style={{ width: "100%", height: "100%", objectFit: "cover", transition: "transform 0.4s ease", filter: "blur(3px)", transform: "scale(1.08)" }}
                       />
                       {/* Overlay on hover */}
                       <div style={{
                         position: "absolute", inset: 0,
-                        background: "linear-gradient(to top, rgba(0,0,0,0.55) 0%, transparent 60%)"
+                        background: "rgba(0, 0, 0, 0.45)"
                       }}></div>
                       {/* Tags over image */}
                       <div style={{ position: "absolute", top: "14px", left: "14px", display: "flex", gap: "6px" }}>
